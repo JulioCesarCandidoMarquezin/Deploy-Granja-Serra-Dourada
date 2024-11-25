@@ -72,6 +72,9 @@
     height: 200px;
 }
 
+#email-box{
+    font-size: x-large;
+}
 
 @media screen and (min-width: 1025px) {
    #maps{
