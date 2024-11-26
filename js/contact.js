@@ -6,7 +6,9 @@ const btn_cancel = document.querySelector("#btn-cancel");
 const blocks = document.querySelectorAll(".content");
 const email_box = document.querySelector("#email-box");
 
-var form = document.forms["mail-form"].elements;
+const form = document.getElementById('mail-form');
+const inputs = form.querySelectorAll('input[required]');
+const tel_input = document.getElementById('telefone-input');
 const sub_button = document.querySelector("#sub-button");
 
 btn_loc.addEventListener("click", () => {
@@ -43,36 +45,26 @@ btn_cancel.addEventListener("click", () => {
     })
 })
 
-function validate() {
-    sub_button.disabled = true;
+function validarFormulario() {       
+    let tudoPreenchido = true;
 
-    var valid = true;
+    inputs.forEach(input => {
+        if (!input.checkValidity()) {
+            tudoPreenchido = false;
+        }        
+    });
 
-    for (var i = 0; i < form.length; i++){
-        
-        if(form[i].type === "text"){
-
-           if (form[i].value.length == 0){
-                valid = false;
-           } 
-
-        }
-
-        if(form[i].type === "number"){
-
-            if (isNaN(form[i].value) || form[i].value.length == 0){
-                 valid = false;
-            } 
-         }
-
-         if(form[i].type === "checkbox"){
-
-            if (!form[i].checked){
-                 valid = false;
-            } 
-         }        
-        }
-        
-        sub_button.disabled = !valid;
+    sub_button.disabled = !tudoPreenchido;
 }
 
+function formatarTelefone(input) {
+    console.log("Júlio homo");
+    let value = input.target.value.replace(/\D/g, ''); 
+    if (value.length > 2) value = `(${value.slice(0, 2)}) ${value.slice(2)}`;
+    if (value.length > 10) value = value.slice(0, 10) + '-' + value.slice(10, 14);
+    input.target.value = value.slice(0, 15); 
+}
+
+tel_input.addEventListener('input', formatarTelefone);
+
+form.addEventListener('input', validarFormulario);
