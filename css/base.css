@@ -1,0 +1,239 @@
+:root {
+    --color-primary: #ffffff;
+    --color-secondary: #451f0f;
+    --color-tertiary: #f9c987;
+    
+    --brown-dark: #5e3012;
+    --brown-light: #997c64;
+    --beige-light: #deceb7;
+    --yellow-dark: #f0ca74;
+    --yellow-light: #fccc8c;
+
+    --box-shadow-light: 0px 4px 8px rgba(0, 0, 0, 0.1);
+
+    --size-title: clamp(1.5rem, 2vw, 2.5rem);
+    --size-subtitle: clamp(1.25rem, 1.75vw, 1.5rem);
+    --size-text: clamp(1rem, 1.5vw, 1.25rem);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+
+    margin: 0;
+    padding: 0;
+
+    background-color: var(--color-primary);
+    color: var(--color-text);
+
+    font-family: 'Arial', sans-serif;
+}
+
+#header {
+    width: 100%;
+    height: clamp(60px, 5vw + 10px, 70px);
+    z-index: 9999;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    top: 0;
+    left: 0;
+    position: sticky;
+
+    padding-right: 20px;
+    box-shadow: var(--box-shadow-light);
+
+    background-color: var(--color-tertiary);
+}
+
+#logo-link {
+    height: 100%;
+}
+
+#logo {
+    height: 100%;
+    margin: 0;
+}
+
+#menu {
+    display: none;
+    position: relative;
+    margin-left: auto;
+}
+
+#menu-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+#menu-icon {
+    width: 30px;
+    height: auto;
+}
+
+#menu-box {
+    position: absolute;
+    top: 100%; 
+    right: 0;
+    background-color: var(--color-tertiary);
+    border-radius: 5px;
+    box-shadow: var(--box-shadow-light);
+    opacity: 0; 
+    visibility: hidden; 
+    transition: opacity 0.5s ease, visibility 0.5s ease; 
+    z-index: 999;
+}
+
+#menu-box.show {
+    opacity: 1; 
+    visibility: visible; 
+}
+
+#navigation-links-mobile {
+    list-style: none;
+    text-align: center;
+    padding: 0;
+    margin: 20px;
+}
+
+#navigation-links-mobile li {
+    list-style-type: none;
+    margin: 0; 
+    padding: 0; 
+}
+
+#navigation-links-mobile li a {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 0 auto;
+    transition: color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+#navigation-links-mobile li:hover {
+    box-shadow: var(--box-shadow-light);
+    background-color: var(--yellow-light);
+}
+
+#navigation-links-mobile li a {
+    width: max-content;
+}
+
+#navigation-links-desktop {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    list-style-type: none;
+    
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+.navigation-link {
+    text-decoration: none;
+    color: var(--color-primary);
+    font-weight: bold;
+    font-size: 1rem;
+    transition: 0.3s ease;
+    display: inline-block;
+}
+
+.hidden {
+    animation: fadeOut 0.5s ease;
+}
+
+.show {
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
+
+.navigation-link:hover {
+    color: var(--color-secondary);
+}
+
+@media (max-width: 768px) {
+    #navigation-links-desktop {
+        display: none; 
+    }
+
+    #menu {
+        display: block; 
+    }
+}
+
+#footer {
+    width: 100%;
+    height: 40vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+
+    box-shadow: var(--box-shadow-light);
+    background-color: var(--color-tertiary);
+}
+
+#social-links {
+    list-style-type: none;
+    display: flex;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+.social-icon {
+    width: 32px;
+    border: none;
+    transition: 0.3s ease;
+}
+
+.social-icon:hover {
+    scale: 1.2;
+}
+
+#copyright {
+    margin-top: 10px;
+    color: var(--color-secondary);
+}
+
+@media (pointer: coarse) { 
+    #whatsapp-web {
+        display: none;
+    }
+}
+
+@media (pointer: fine) { 
+    #whatsapp-mobile {
+        display: none;
+    }
+}
