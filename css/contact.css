@@ -45,14 +45,9 @@
     
 }
 
-#form-btns button:disabled{
+.botao button:disabled{
     background-color: var(--disbled-Color);
     border-color: var(--disbled-Color);
-}
-
-#form-btns button:active{
-    background-color: var(--color-tertiary);
-    border-color: var(--color-tertiary);
 }
 
 

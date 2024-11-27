@@ -41,8 +41,12 @@ btn_cancel.addEventListener("click", () => {
         }else {
             block.style.display = 'none';
         }
-        btn_loc.style.display = 'flex';
+        
     })
+
+    if (window.innerWidth > 1024){
+        btn_loc.style.display = 'flex';
+    }
 })
 
 function validarFormulario() {       
