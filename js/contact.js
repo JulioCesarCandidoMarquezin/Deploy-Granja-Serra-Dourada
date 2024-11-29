@@ -43,7 +43,9 @@ btn_cancel.addEventListener("click", () => {
         }
         
     })
-
+    inputs.forEach((input) =>{
+        input.value = null;
+    })
     if (window.innerWidth > 1024){
         btn_loc.style.display = 'flex';
     }
