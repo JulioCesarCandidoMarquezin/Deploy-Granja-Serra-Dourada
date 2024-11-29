@@ -22,7 +22,6 @@ btn_loc.addEventListener("click", () => {
 
 })
 
-
 btn_talk.addEventListener("click", () => {
 
     blocks.forEach((block) => {
@@ -43,9 +42,7 @@ btn_cancel.addEventListener("click", () => {
         }
         
     })
-    inputs.forEach((input) =>{
-        input.value = null;
-    })
+
     if (window.innerWidth > 1024){
         btn_loc.style.display = 'flex';
     }
@@ -72,5 +69,4 @@ function formatarTelefone(input) {
 }
 
 tel_input.addEventListener('input', formatarTelefone);
-
 form.addEventListener('input', validarFormulario);

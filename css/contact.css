@@ -46,6 +46,7 @@
 }
 
 .botao button:disabled{
+    color: var(--color-primary);
     background-color: var(--disbled-Color);
     border-color: var(--disbled-Color);
 }
