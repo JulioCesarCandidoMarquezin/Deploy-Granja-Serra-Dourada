@@ -11,6 +11,8 @@ const inputs = form.querySelectorAll('input[required]');
 const tel_input = document.getElementById('telefone-input');
 const sub_button = document.querySelector("#sub-button");
 
+const btn_loc_mb = document.getElementById("maps");
+
 btn_loc.addEventListener("click", () => {
     if (mapa.style.display === 'none') {
         mapa.style.display = 'flex';
@@ -31,6 +33,7 @@ btn_talk.addEventListener("click", () => {
     })
     email_box.style.display = 'flex';
     btn_loc.style.display = 'none';
+    btn_loc_mb.style.display = "none";
 })
 
 btn_cancel.addEventListener("click", () => {
@@ -45,6 +48,8 @@ btn_cancel.addEventListener("click", () => {
 
     if (window.innerWidth > 1024){
         btn_loc.style.display = 'flex';
+    } else {
+        btn_loc_mb.style.display = "flex";
     }
 })
 
