@@ -66,22 +66,18 @@
 }
 
 .flex-container>div {
-    background-color: #ffffff;
+    background-color: #fcfbfa;
     border-radius: 5px;
     padding: 50px;
     max-width: 1000px;
     font-size: 30px;
     margin: 20PX 70px 50px 70px;
     text-align: center;
-    box-shadow: 0px 5px 6px #3120077c;
+    box-shadow: 0px 3px 6px #3120077c;
 }
 
 .card-img-top{
     border-radius: 5px;
-}
-
-.button{
-    background-color: blue;
 }
 
 .card-body{
@@ -102,7 +98,6 @@
     color: #451f0f;
     margin: 20px;
     margin-bottom: 20px;
-    /* box-shadow: 1px 3px  1px #451f0f; */
 }
 
 .produto {
