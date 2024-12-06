@@ -1,25 +1,11 @@
 @import url(/css/base.css);
 
-:root {
-    --brown-dark: #5E3012;
-    --brown-light: #997C64;
-    --beige-light: #DECEB7;
-    --yellow-dark: #F0CA74;
-    --yellow-light: #FCCC8C;
-
-    --box-shadow-light: 0px 4px 8px rgba(0, 0, 0, 0.1);
-
-    --size-title: clamp(1.5rem, 2vw, 2.5rem);
-    --size-subtitle: clamp(1.25rem, 1.75vw, 1.5rem);
-    --size-text: clamp(1rem, 1.5vw, 1.25rem);
-}
-
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f5f5f5;
 }
 .header {
-    background-image: url('/assets/images/logo.jpg');
+    background-image: url('/assets/images/historia1.jpeg');
     
     color: white;
     text-align: center;
@@ -156,17 +142,3 @@ section {
     margin-bottom: 0.5rem;
 }
 
-/* Curiosidades */
-.curiosities {
-    margin-top: 2rem;
-}
-
-.curiosities ul {
-    list-style-type: disc;
-    padding-left: 1.5rem;
-}
-
-.curiosities ul li {
-    margin-bottom: 0.5rem;
-    color: #666;
-}
