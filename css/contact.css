@@ -1,4 +1,5 @@
 @import url(/css/base.css);
+@import url('https://fonts.googleapis.com/css2?family=Phetsarath:wght@400;700&family=Yuji+Mai&display=swap');
 
 :root{
     --disbled-Color: #ebca9b;
@@ -23,6 +24,14 @@
     height: auto;
 }
 
+.content h1{
+    text-align: center;   
+}
+
+.content p{
+    font-size:x-large;
+    margin: 20px;
+}
 
 .botao button{
     transition: transform 0.3s;
@@ -32,6 +41,7 @@
 
     margin: 20px ;
 }
+
 .botao button:hover{
     transform: translateY(-5px);
     background-color: var(--color-primary);
@@ -51,14 +61,10 @@
     border-color: var(--disbled-Color);
 }
 
+#msg {
+    resize: none;
+  }
 
-.content h1{
-    text-align: center;   
-}
-.content p{
-    font-size:x-large;
-    margin: 20px;
-}
 .mapBox {
     display: block;
     text-align: center;
