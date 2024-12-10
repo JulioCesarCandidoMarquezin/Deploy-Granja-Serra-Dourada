@@ -1,4 +1,9 @@
 @import url(/css/base.css);
+@import url('https://fonts.googleapis.com/css2?family=Phetsarath:wght@400;700&family=Yuji+Mai&display=swap');
+
+:root{
+    --disbled-Color: #ebca9b;
+}
 .container{
     display: flex;
     justify-content: center;
@@ -19,26 +24,47 @@
     height: auto;
 }
 
+.content h1{
+    text-align: center;   
+}
+
+.content p{
+    font-size:x-large;
+    margin: 20px;
+}
+
 .botao button{
+    transition: transform 0.3s;
     border-color: var(--color-tertiary);
     color: var(--color-primary);
     background-color: var(--color-tertiary);
 
     margin: 20px ;
 }
+
 .botao button:hover{
+    transform: translateY(-5px);
     background-color: var(--color-primary);
     border-color: var(--color-tertiary);
     color: var(--color-secondary);
 
 }
-.content h1{
-    text-align: center;   
+
+#form-btns button{
+    margin: 0;
+    
 }
-.content p{
-    font-size:x-large;
-    margin: 20px;
+
+.botao button:disabled{
+    color: var(--color-primary);
+    background-color: var(--disbled-Color);
+    border-color: var(--disbled-Color);
 }
+
+#msg {
+    resize: none;
+  }
+
 .mapBox {
     display: block;
     text-align: center;
@@ -72,6 +98,9 @@
     height: 200px;
 }
 
+#email-box{
+    font-size: x-large;
+}
 
 @media screen and (min-width: 1025px) {
    #maps{
