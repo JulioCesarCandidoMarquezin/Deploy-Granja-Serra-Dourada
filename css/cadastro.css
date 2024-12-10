@@ -1,23 +1,17 @@
 @import url(/css/base.css);
-@import url('https://fonts.googleapis.com/css2?family=Phetsarath:wght@400;700&family=Yuji+Mai&display=swap');
-
-:root{
-    --disbled-Color: #ebca9b;
-}
 .container{
     display: flex;
     justify-content: center;
     gap: 30px;
     padding: 20px;
     margin: 40px;
-    
+
 }
 
 .content{
-    font: "Merriweather";
     border-radius: 25px;
     text-align: justify;
-    background-color: #FFFFFF;
+    background-color: #dad0b9;
 
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(107, 106, 106, 0.19);
 
@@ -25,47 +19,26 @@
     height: auto;
 }
 
-.content h1{
-    text-align: center;   
-}
-
-.content p{
-    font-size:x-large;
-    margin: 20px;
-}
-
 .botao button{
-    transition: transform 0.3s;
     border-color: var(--color-tertiary);
     color: var(--color-primary);
     background-color: var(--color-tertiary);
 
     margin: 20px ;
 }
-
 .botao button:hover{
-    transform: translateY(-5px);
     background-color: var(--color-primary);
     border-color: var(--color-tertiary);
     color: var(--color-secondary);
 
 }
-
-#form-btns button{
-    margin: 0;
-    
+.content h1{
+    text-align: center;   
 }
-
-.botao button:disabled{
-    color: var(--color-primary);
-    background-color: var(--disbled-Color);
-    border-color: var(--disbled-Color);
+.content p{
+    font-size:x-large;
+    margin: 20px;
 }
-
-#msg {
-    resize: none;
-  }
-
 .mapBox {
     display: block;
     text-align: center;
@@ -99,9 +72,6 @@
     height: 200px;
 }
 
-#email-box{
-    font-size: x-large;
-}
 
 @media screen and (min-width: 1025px) {
    #maps{
@@ -135,7 +105,7 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        width: 100%;
+        width: 200px;
     }
     
     .content{
