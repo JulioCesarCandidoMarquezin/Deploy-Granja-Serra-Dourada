@@ -63,7 +63,7 @@ function handleCadastroProduto() {
 
     $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/assets/images/produtos/';
     if (!is_dir($uploadDir)) {
-        mkdir($uploadDir, 0777, true);
+        mkdir($uploadDir, 0755, true);
     }
 
     $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
