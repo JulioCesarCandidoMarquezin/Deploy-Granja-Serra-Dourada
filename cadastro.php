@@ -32,7 +32,7 @@
         <div class="container" id="blocks">
 
             <div class="content" id="email-box">
-                <form action="classes/Servidor.php" method="POST" class="row g-3" style="margin: 20px;">
+                <form action="php/Servidor.php" method="POST" class="row g-3" style="margin: 20px;">
                     <input type="hidden" name="action" value="cadastro">
 
                     <div class="col-12">

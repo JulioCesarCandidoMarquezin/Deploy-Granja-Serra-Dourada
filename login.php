@@ -1,5 +1,5 @@
 <?php 
-include_once "classes/Auth.class.php";
+include_once "php/Auth.class.php";
 
 if (Auth::estaLogado()) {
     header("Location: /index.php");
@@ -42,7 +42,7 @@ if (Auth::estaLogado()) {
                     <div class="card-body p-4">
                         <h3 class="card-title text-center mb-4">Login</h3>
 
-                        <form action="/classes/Servidor.php" method="POST">
+                        <form action="/php/Servidor.php" method="POST">
                             <input type="hidden" name="action" value="login">
 
                             <div class="mb-3">

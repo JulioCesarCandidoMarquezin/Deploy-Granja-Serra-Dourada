@@ -28,7 +28,7 @@
     <?php include 'components/cabecalho.php'; ?>
 
     <div class="container mt-5">
-        <form class="form" action="/classes/Servidor.php" method="POST" enctype="multipart/form-data">
+        <form class="form" action="/php/Servidor.php" method="POST" enctype="multipart/form-data">
             <div class="container mt-5">
                 <div class="row justify-content-center">
                     <div class="col-md-8 col-lg-6">
