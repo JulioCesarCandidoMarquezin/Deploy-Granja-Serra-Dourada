@@ -10,7 +10,7 @@ function handleLogin() {
 
         if (Auth::login($email, $senha)) {
             $_SESSION['message'] = "Login realizado com sucesso!";
-            header('Location: index.php'); 
+            header('Location: /index.php'); 
             exit();
         } else {
             $_SESSION['message'] = "Credenciais inválidas!";
@@ -29,7 +29,7 @@ function handleRegister() {
 
         if (Auth::register($nome, $email, $senha, $nivel)) {
             $_SESSION['message'] = "Cadastro realizado com sucesso! Agora você pode fazer login.";
-            header('Location: login.php'); 
+            header('Location: /login.php'); 
             exit();
         } else {
             $_SESSION['message'] = "Erro ao realizar o cadastro. Verifique se o e-mail já está em uso.";
@@ -89,7 +89,7 @@ function handleCadastroProduto() {
             $produto->create();
 
             $_SESSION['message'] = "Produto cadastrado com sucesso!";
-            header('Location: produtos.php');
+            header('Location: /cadastro-produto.php');
             exit();
         } catch (Exception $e) {
             $_SESSION['message'] = "Erro ao cadastrar o produto: " . $e->getMessage();

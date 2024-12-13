@@ -6,11 +6,9 @@ $telefone = $_POST["telefone"];
 $assunto = $_POST["assunto"];   
 $mensagem = $_POST["mensagem"] . "<br> Nome da lenda: {$name}" . "<br> Telefone do indivíduo: {$telefone}";
 
-
 $to = $email;  
 $subject = $assunto;  
 $message = $mensagem;  
-
 
 $headers = "MIME-Version: 1.0" . "\r\n";
 $headers .= "Content-Type: text/html; charset=UTF-8" . "\r\n";  

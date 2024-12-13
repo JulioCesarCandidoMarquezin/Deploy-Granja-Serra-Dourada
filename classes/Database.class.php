@@ -2,11 +2,11 @@
 final class Database
 {
     private static string $driver = "mysql"; 
-    private static string $host = "db"; 
+    private static string $host = "mysql"; 
     private static string $dbname = "granja-serra-dourada"; 
     private static int $port = 3306; 
-    private static string $username = "admin"; 
-    private static string $password = "admin"; 
+    private static string $username = "root"; 
+    private static string $password = "root"; 
     private static string $charset = "utf8mb4"; 
     private static ?PDO $pdo = null;
     private static string $error;
