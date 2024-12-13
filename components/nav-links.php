@@ -4,7 +4,7 @@ include_once 'classes/Permissao.enum.php';
 ?>
 
 <li><a class="navigation-link" href="/index.php">Home</a></li>
-<li><a class="navigation-link" href="/obre.php">Quem Somos</a></li>
+<li><a class="navigation-link" href="/sobre.php">Quem Somos</a></li>
 <li><a class="navigation-link" href="/produtos.php">Produtos</a></li>
 <li><a class="navigation-link" href="/contato.php">Contato</a></li>
 
