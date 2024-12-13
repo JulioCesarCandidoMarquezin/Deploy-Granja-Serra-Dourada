@@ -4,19 +4,14 @@
     </a>
 
     <div id="menu">
-        <button id="menu-toggle" onclick="menuToggle()">
+        <button id="menu-toggle" onclick="menu_toggle()">
             <img id="menu-icon" src="assets/icons/menu-closed.png" alt="Menu" loading="lazy">
         </button>
 
         <div id="menu-box" class="hidden">
             <nav>
                 <ul id="navigation-links-mobile">
-                    <li><a class="navigation-link" href="index.php">Home</a></li>
-                    <li><a class="navigation-link" href="sobre.php">Quem Somos</a></li>
-                    <li><a class="navigation-link" href="produtos.php">Produtos</a></li>
-                    <li><a class="navigation-link" href="contato.php">Contato</a></li>
-                    <li><a class="navigation-link" href="login.php">Login</a></li>
-                    <li><a class="navigation-link" href="cadastro-produto.php">Cadastro Produto</a></li>
+                    <?php include 'nav-links.php'; ?>
                 </ul>
             </nav>
         </div>
@@ -24,17 +19,12 @@
 
     <nav>
         <ul id="navigation-links-desktop">
-            <li><a class="navigation-link" href="index.php">Home</a></li>
-            <li><a class="navigation-link" href="sobre.php">Quem Somos</a></li>
-            <li><a class="navigation-link" href="produtos.php">Produtos</a></li>
-            <li><a class="navigation-link" href="contato.php">Contato</a></li>
-            <li><a class="navigation-link" href="login.php">Login</a></li> 
-            <li><a class="navigation-link" href="cadastro-produto.php">Cadastro Produto</a></li>
+            <?php include 'nav-links.php'; ?>
         </ul>
     </nav>
 
     <script>
-        function menuToggle() {
+        function menu_toggle() {
             const menuLinks = document.getElementById('menu-box');
             const menuIcon = document.getElementById('menu-icon');                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
 
