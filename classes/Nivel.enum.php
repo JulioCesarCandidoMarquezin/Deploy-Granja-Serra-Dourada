@@ -25,14 +25,4 @@ enum Nivel: string
             ],
         };
     }
-
-    public static function all(): array
-    {
-        return array_map(fn($nivel) => "'$nivel'", self::cases());
-    }
-
-    public static function allString(): string
-    {
-        return implode(', ', self::all());
-    }
 }
