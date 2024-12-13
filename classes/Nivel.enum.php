@@ -14,16 +14,14 @@ enum Nivel: string
             self::ADMINISTRADOR => [
                 Permissao::GERENCIAR_USUARIOS,
                 Permissao::GERENCIAR_PRODUTOS,
-                Permissao::VER_RELATORIOS,
                 Permissao::ACESSO_TOTAL
             ],
             self::GERENTE => [
-                Permissao::GERENCIAR_PRODUTOS,
-                Permissao::VER_RELATORIOS
+                Permissao::GERENCIAR_USUARIOS,
+                Permissao::GERENCIAR_PRODUTOS
             ],
             self::FUNCIONARIO => [
-                Permissao::GERENCIAR_PEDIDOS,
-                Permissao::VER_PRODUTOS
+                Permissao::GERENCIAR_PRODUTOS
             ],
         };
     }

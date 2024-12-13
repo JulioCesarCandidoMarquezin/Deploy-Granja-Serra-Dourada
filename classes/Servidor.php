@@ -2,54 +2,60 @@
 
 require_once 'Auth.class.php';
 require_once 'Produto.class.php';
+require_once 'Mensagem.enum.php';
+
+session_start();
 
 function handleLogin() {
     if (isset($_POST['email'], $_POST['senha'])) {
-        $email = $_POST['email'];
+        $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
         $senha = $_POST['senha'];
 
         if (Auth::login($email, $senha)) {
-            $_SESSION['message'] = "Login realizado com sucesso!";
+            $_SESSION['message'] = Mensagem::LOGIN_SUCCESS;
             header('Location: /index.php'); 
+            exit();
         } else {
-            $_SESSION['message'] = "Credenciais inválidas!";
+            $_SESSION['message'] = Mensagem::LOGIN_FAILURE;
             header('Location: /login.php'); 
+            exit();
         }
     } else {
-        $_SESSION['message'] = "Por favor, forneça o e-mail e a senha.";
+        $_SESSION['message'] = Mensagem::LOGIN_MISSING;
     }
 }
 
 function handleRegister() {
     if (isset($_POST['nome'], $_POST['email'], $_POST['senha'], $_POST['nivel'])) {
-        $nome = $_POST['nome'];
-        $email = $_POST['email'];
+        $nome = filter_var($_POST['nome'], FILTER_SANITIZE_STRING);
+        $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
         $senha = $_POST['senha'];
         $nivel = Nivel::from($_POST['nivel']); 
 
-        if (Auth::register($nome, $email, $senha, $nivel)) {
-            $_SESSION['message'] = "Cadastro realizado com sucesso! Agora você pode fazer login.";
+        try {
+            Auth::register($nome, $email, $senha, $nivel);
+            $_SESSION['message'] = Mensagem::REGISTER_SUCCESS;
             header('Location: /cadastro.php'); 
             exit();
-        } else {
-            $_SESSION['message'] = "Erro ao realizar o cadastro. Verifique se o e-mail já está em uso.";
+        } catch (Exception $e) {
+            $_SESSION['message'] = Mensagem::REGISTER_FAILURE;
         }
     } else {
-        $_SESSION['message'] = "Por favor, forneça todos os dados para o cadastro.";
+        $_SESSION['message'] = Mensagem::REGISTER_MISSING;
     }
 }
 
 function handleLogout() {
     Auth::logout();
-    $_SESSION['message'] = "Você saiu com sucesso!";
+    $_SESSION['message'] = Mensagem::LOGOUT_SUCCESS;
     header('Location: /index.php');
     exit();
 }
 
 function handleCadastroProduto() {
     if (isset($_POST['nome'], $_POST['descricao'], $_FILES['imagem'])) {
-        $nome = $_POST['nome'];
-        $descricao = $_POST['descricao'];
+        $nome = filter_var($_POST['nome'], FILTER_SANITIZE_STRING);
+        $descricao = filter_var($_POST['descricao'], FILTER_SANITIZE_STRING);
         $imagem = $_FILES['imagem'];
 
         $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/assets/images/produtos/';
@@ -61,19 +67,23 @@ function handleCadastroProduto() {
         $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
 
         if (!in_array($imagem['type'], $allowedTypes)) {
-            $_SESSION['message'] = "Formato de imagem inválido. Use JPEG, PNG ou GIF.";
+            $_SESSION['message'] = Mensagem::IMAGE_FORMAT_ERROR;
             return;
         }
 
         if ($imagem['error'] !== UPLOAD_ERR_OK) {
-            $_SESSION['message'] = "Erro no upload da imagem: " . $imagem['error'];
+            $_SESSION['message'] = Mensagem::IMAGE_UPLOAD_ERROR . $imagem['error'];
             return;
         }
 
+        $fileName = basename($imagem['name']);
+        $fileName = preg_replace('/[^a-zA-Z0-9_\-\.]/', '', $fileName);
+        $uploadPath = $uploadDir . $fileName;
+
         if (!move_uploaded_file($imagem['tmp_name'], $uploadPath)) {
-            $_SESSION['message'] = "Erro ao fazer upload da imagem.";
+            $_SESSION['message'] = Mensagem::UPLOAD_ERROR;
             return;
-        }
+ }
 
         try {
             $produto = new Produto();
@@ -84,11 +94,11 @@ function handleCadastroProduto() {
 
             $produto->create();
 
-            $_SESSION['message'] = "Produto cadastrado com sucesso!";
+            $_SESSION['message'] = Mensagem::PRODUCT_REGISTER_SUCCESS;
             header('Location: /cadastro-produto.php');
             exit();
         } catch (Exception $e) {
-            $_SESSION['message'] = "Erro ao cadastrar o produto: " . $e->getMessage();
+            $_SESSION['message'] = Mensagem::PRODUCT_REGISTER_FAILURE . $e->getMessage();
         }
     } else {
         $_SESSION['message'] = "Por favor, preencha todos os campos do formulário.";
@@ -116,8 +126,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             break;
 
         default:
-            $_SESSION['message'] = "Ação não reconhecida.";
+            $_SESSION['message'] = Mensagem::ACTION_UNRECOGNIZED;
     }
 } else {
-    $_SESSION['message'] = "Método de requisição não permitido.";
+    $_SESSION['message'] = Mensagem::REQUEST_METHOD_NOT_ALLOWED;
 }

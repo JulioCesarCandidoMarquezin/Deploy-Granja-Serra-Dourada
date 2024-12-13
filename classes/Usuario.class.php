@@ -5,7 +5,6 @@ require_once 'Nivel.enum.php';
 
 class Usuario extends CRUD
 {
-
     protected static string $table = "Usuario";
     protected static array $columns = [
         'nome' => 'VARCHAR(50)',
@@ -22,16 +21,27 @@ class Usuario extends CRUD
 
     public function create(): void
     {
+        if (empty($this->nome) || empty($this->email) || empty($this->senha) || !isset($this->nivel)) {
+            throw new InvalidArgumentException("All fields must be set before creating a user.");
+        }
+
         $fields = ['nome', 'email', 'nivel', 'senha'];
-        $values = [$this->nome, $this->email, $this->nivel->value, $this->senha];
+        $values = [$this->nome, $this->email, $this->nivel->value, password_hash($this->senha, PASSWORD_BCRYPT)];
         $params = $values;
 
         $fieldsList = implode(", ", $fields);
         $valuesList = implode(", ", array_fill(0, count($values), "?"));
 
         $sql = "INSERT INTO " . static::$table . " ($fieldsList) VALUES ($valuesList)";
-
         self::execute($sql, $params);
+    }
+
+    public static function emailExists(string $email): bool
+    {
+        $sql = "SELECT COUNT(*) FROM " . static::$table . " WHERE email = ?";
+        $stmt = Database::prepare($sql);
+        $stmt->execute([$email]);
+        return $stmt->fetchColumn() > 0;
     }
 
     public function getNivel(): Nivel
@@ -52,6 +62,9 @@ class Usuario extends CRUD
 
     public function setEmail(string $email): self
     {
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            throw new InvalidArgumentException("Invalid email format.");
+        }
         $this->email = $email;
         return $this;
     }
@@ -63,11 +76,14 @@ class Usuario extends CRUD
 
     public function setNome(string $nome): self
     {
+        if (empty($nome)) {
+            throw new InvalidArgumentException("Name cannot be empty.");
+        }
         $this->nome = $nome;
         return $this;
     }
 
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -85,6 +101,9 @@ class Usuario extends CRUD
 
     public function setSenha(string $senha): self
     {
+        if (strlen($senha) < 6) {
+            throw new InvalidArgumentException("Password must be at least 6 characters long.");
+        }
         $this->senha = $senha;
         return $this;
     }
