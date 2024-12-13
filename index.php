@@ -28,7 +28,10 @@
     <?php include 'components/header.php'; ?>
 
     <main class="main-content">
-        <img id="banner" src="assets/images/banner.webp" alt="Banner" loading="lazy">
+    <div class="presentation-header" style="background-image: url('assets/images/historia1.jpeg');">
+    <h1>Granja Serra Dourada</h1>
+            <p>A nossa história de dedicação e compromisso com a qualidade</p>
+    </div>
 
         <section class="highlight-cards-section">
             <h2 class="highlight-cards-title">Destaques</h2>

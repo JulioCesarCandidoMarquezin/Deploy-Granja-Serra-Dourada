@@ -29,7 +29,7 @@
 
   <main>
     <!-- Cabeçalho do produto -->
-    <div class="history-header">
+    <div class="history-header" style="background-image: url('assets/images/historia1.jpeg');">
       <h1>Granja Serra Dourada</h1>
       <p>Conheça Nossos Produtos!</p>
     </div>

@@ -1,5 +1,30 @@
 @import url('base.css');
 
+.top_text::after{
+    content: '';
+    width: 100px;
+    height: 4px;
+    background-color: #f9c987;
+    display: block;
+    margin: 0.5rem auto;
+    margin-bottom: 25px;
+}
+.presentation-header {
+    
+    
+    color: white;
+    text-align: center;
+    padding: 6rem 2rem;
+    box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.5);
+}
+.presentation-header h1 {
+    font-size: 3rem;
+    font-weight: bold;
+}
+.presentation-header p {
+    font-size: 1.2rem;
+}
+
 .container {
     display: flex;
     justify-content: center;
@@ -71,11 +96,7 @@
     margin-top: 2rem;
 }
 
-.top img {
-    margin-bottom: 20px;
-    width: 200px;
-    height: 200px;
-}
+
 
 @media screen and (min-width: 1025px) {
     #maps {

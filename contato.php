@@ -29,10 +29,13 @@
   <?php include 'components/header.php'; ?>
 
   <main>
+  <div class="presentation-header" style="background-image: url('assets/images/historia1.jpeg');">
+            <h1>Granja Serra Dourada</h1>
+            <p>A nossa história de dedicação e compromisso com a qualidade</p>
+        </div>
     <div class="top">
       <div class="top_text">
         <h1>Fale conosco</h1>
-        <h4>Esperamos o seu contato</h4>
       </div>
 
     </div>
