@@ -1,6 +1,6 @@
 <header id="header">
     <a id="logo-link" href="/">
-        <img id="logo" src="assets/images/banner.webp" alt="Logo - Granja Serra Dourada" loading="lazy">
+        <img id="logo" src="assets/images/banner.png" alt="Logo - Granja Serra Dourada" loading="lazy">
     </a>
 
     <div id="menu">
