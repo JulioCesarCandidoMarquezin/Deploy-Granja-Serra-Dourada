@@ -1,0 +1,5 @@
+/.vscode
+/.idea
+
+/docker-compose.yml
+/assets/images/produtos
