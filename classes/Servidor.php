@@ -11,9 +11,9 @@ function handleLogin() {
         if (Auth::login($email, $senha)) {
             $_SESSION['message'] = "Login realizado com sucesso!";
             header('Location: /index.php'); 
-            exit();
         } else {
             $_SESSION['message'] = "Credenciais inválidas!";
+            header('Location: /login.php'); 
         }
     } else {
         $_SESSION['message'] = "Por favor, forneça o e-mail e a senha.";
@@ -29,7 +29,7 @@ function handleRegister() {
 
         if (Auth::register($nome, $email, $senha, $nivel)) {
             $_SESSION['message'] = "Cadastro realizado com sucesso! Agora você pode fazer login.";
-            header('Location: /login.php'); 
+            header('Location: /cadastro.php'); 
             exit();
         } else {
             $_SESSION['message'] = "Erro ao realizar o cadastro. Verifique se o e-mail já está em uso.";
@@ -42,15 +42,11 @@ function handleRegister() {
 function handleLogout() {
     Auth::logout();
     $_SESSION['message'] = "Você saiu com sucesso!";
-    header('Location: index.php');
+    header('Location: /index.php');
     exit();
 }
 
 function handleCadastroProduto() {
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }
-
     if (isset($_POST['nome'], $_POST['descricao'], $_FILES['imagem'])) {
         $nome = $_POST['nome'];
         $descricao = $_POST['descricao'];
@@ -100,10 +96,6 @@ function handleCadastroProduto() {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }    
-
     $action = $_POST['action'];
 
     switch ($action) {
@@ -129,6 +121,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 } else {
     $_SESSION['message'] = "Método de requisição não permitido.";
 }
-
-echo $_POST['action'];
-echo $_SESSION['message'];

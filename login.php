@@ -34,9 +34,9 @@
                     <div class="card-body p-4">
                         <h3 class="card-title text-center mb-4">Login</h3>
 
-                        <input type="hidden" name="action" value="login">
+                        <form action="/classes/Servidor.php" method="POST">
+                            <input type="hidden" name="action" value="login">
 
-                        <form action="/classes/Servidor.php(nao tá pronto)" method="POST">
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
                                 <input type="email" id="email" name="email" class="form-control"
