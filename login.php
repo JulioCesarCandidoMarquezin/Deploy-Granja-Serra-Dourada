@@ -1,3 +1,11 @@
+<?php 
+include_once "classes/Auth.class.php";
+
+if (Auth::estaLogado()) {
+    header("Location: /index.php");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
