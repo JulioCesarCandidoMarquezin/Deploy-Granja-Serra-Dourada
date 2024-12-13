@@ -1,4 +1,4 @@
-@import url(/css/base.css);
+@import url('base.css');
 
 :root {
     --brown-dark: #5E3012;
@@ -19,7 +19,7 @@ body {
     background-color: #f5f5f5;
 }
 .presentation-header {
-    background-image: url('/assets/images/historia1.jpeg');
+    
     
     color: white;
     text-align: center;

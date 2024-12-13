@@ -12,12 +12,12 @@
 
   <meta property="og:title" content="Granja Serra Dourada">
   <meta property="og:description" content="Granja Serra Dourada, produtora de ovos de alta qualidade em Cacoal - RO.">
-  <meta property="og:image" content="/assets/images/banner.webp">
+  <meta property="og:image" content="assets/images/banner.webp">
   <meta property="og:url" content="https://www.granjaserradourada.com.br/produtos">
   <meta name="twitter:card" content="summary_large_image">
 
-  <link rel="stylesheet" href="/css/produtos.css">
-  <link rel="shortcut icon" href="/assets/images/logo_rounded.png" type="image/x-icon">
+  <link rel="stylesheet" href="css/produtos.css">
+  <link rel="shortcut icon" href="assets/images/logo_rounded.png" type="image/x-icon">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
@@ -25,11 +25,11 @@
 </head>
 
 <body>
-  <?php include './components/header.php'; ?>
+  <?php include 'components/header.php'; ?>
 
   <main>
     <!-- Cabeçalho do produto -->
-    <div class="history-header">
+    <div class="history-header" style="background-image: url('assets/images/historia1.jpeg');">
       <h1>Granja Serra Dourada</h1>
       <p>Conheça Nossos Produtos!</p>
     </div>
@@ -77,7 +77,7 @@
 
   </main>
 
-  <?php include './components/footer.php'; ?>
+  <?php include 'components/footer.php'; ?>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

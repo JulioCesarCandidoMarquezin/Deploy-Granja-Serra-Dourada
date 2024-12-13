@@ -12,12 +12,12 @@
 
     <meta property="og:title" content="Granja Serra Dourada">
     <meta property="og:description" content="Granja Serra Dourada, produtora de ovos de alta qualidade em Cacoal - RO.">
-    <meta property="og:image" content="/assets/images/banner.webp">
+    <meta property="og:image" content="assets/images/banner.webp">
     <meta property="og:url" content="https://www.granjaserradourada.com.br/sobre">
     <meta name="twitter:card" content="summary_large_image">
 
-    <link rel="stylesheet" href="/css/sobre.css">
-    <link rel="shortcut icon" href="/assets/images/logo_rounded.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/sobre.css">
+    <link rel="shortcut icon" href="assets/images/logo_rounded.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
@@ -25,14 +25,14 @@
 </head>
 
 <body>
-    <?php include './components/header.php'; ?>
+    <?php include 'components/header.php'; ?>
 
     <main>
         <!-- Header -->
 
         </div>
         <!-- Seção de História -->
-        <div class="presentation-header">
+        <div class="presentation-header" style="background-image: url('assets/images/historia1.jpeg');">
             <h1>Granja Serra Dourada</h1>
             <p>A nossa história de dedicação e compromisso com a qualidade</p>
         </div>
@@ -46,13 +46,13 @@
                     <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
                         <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="/assets/images/abo.jpeg" class="d-block w-100" alt="...">
+                            <img src="assets/images/abo.jpeg" class="d-block w-100" alt="...">
                         </div>
                         <div class="carousel-item">
-                            <img src="/assets/images/O.jpeg" class="d-block w-100" alt="...">
+                            <img src="assets/images/O.jpeg" class="d-block w-100" alt="...">
                         </div>
                         <div class="carousel-item">
-                            <img src="/assets/images/OI.jpeg" class="d-block w-100" alt="...">
+                            <img src="assets/images/OI.jpeg" class="d-block w-100" alt="...">
                         </div>
                         </div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">

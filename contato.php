@@ -13,12 +13,12 @@
 
   <meta property="og:title" content="Granja Serra Dourada">
   <meta property="og:description" content="Granja Serra Dourada, produtora de ovos de alta qualidade em Cacoal - RO.">
-  <meta property="og:image" content="/assets/images/banner.webp">
+  <meta property="og:image" content="assets/images/banner.webp">
   <meta property="og:url" content="https://www.granjaserradourada.com.br/contato">
   <meta name="twitter:card" content="summary_large_image">
 
-  <link rel="stylesheet" href="/css/contato.css">
-  <link rel="shortcut icon" href="/assets/images/logo_rounded.png" type="image/x-icon">
+  <link rel="stylesheet" href="css/contato.css">
+  <link rel="shortcut icon" href="assets/images/logo_rounded.png" type="image/x-icon">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
@@ -26,13 +26,16 @@
 </head>
 
 <body>
-  <?php include './components/header.php'; ?>
+  <?php include 'components/header.php'; ?>
 
   <main>
+  <div class="presentation-header" style="background-image: url('assets/images/historia1.jpeg');">
+            <h1>Granja Serra Dourada</h1>
+            <p>A nossa história de dedicação e compromisso com a qualidade</p>
+        </div>
     <div class="top">
       <div class="top_text">
         <h1>Fale conosco</h1>
-        <h4>Esperamos o seu contato</h4>
       </div>
 
     </div>
@@ -125,9 +128,9 @@
     </div>
   </main>
 
-  <?php include './components/footer.php'; ?>
+  <?php include 'components/footer.php'; ?>
 
-  <script src="/js/contact.js"></script>
+  <script src="js/contact.js"></script>
 </body>
 
 </html>
