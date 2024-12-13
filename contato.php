@@ -14,10 +14,10 @@
   <meta property="og:title" content="Granja Serra Dourada">
   <meta property="og:description" content="Granja Serra Dourada, produtora de ovos de alta qualidade em Cacoal - RO.">
   <meta property="og:image" content="/assets/images/banner.webp">
-  <meta property="og:url" content="https://www.granjaserradourada.com.br">
+  <meta property="og:url" content="https://www.granjaserradourada.com.br/contato">
   <meta name="twitter:card" content="summary_large_image">
 
-  <link rel="stylesheet" href="/css/contact.css">
+  <link rel="stylesheet" href="/css/contato.css">
   <link rel="shortcut icon" href="/assets/images/logo_rounded.png" type="image/x-icon">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -26,7 +26,7 @@
 </head>
 
 <body>
-  <header id="header"></header>
+  <?php include './components/header.php'; ?>
 
   <main>
     <div class="top">
@@ -125,11 +125,9 @@
     </div>
   </main>
 
-  <footer id="footer"></footer>
+  <?php include './components/footer.php'; ?>
 
-  <script type="module" src="/js/main.js"></script>
-  <script src="js/contact.js"></script>
-
+  <script src="/js/contact.js"></script>
 </body>
 
 </html>

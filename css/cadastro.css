@@ -1,14 +1,14 @@
 @import url(/css/base.css);
-.container{
+
+.container {
     display: flex;
     justify-content: center;
     gap: 30px;
     padding: 20px;
     margin: 40px;
-
 }
 
-.content{
+.content {
     border-radius: 25px;
     text-align: justify;
     background-color: #dad0b9;
@@ -19,26 +19,30 @@
     height: auto;
 }
 
-.botao button{
+.botao button {
     border-color: var(--color-tertiary);
     color: var(--color-primary);
     background-color: var(--color-tertiary);
 
-    margin: 20px ;
+    margin: 20px;
 }
-.botao button:hover{
+
+.botao button:hover {
     background-color: var(--color-primary);
     border-color: var(--color-tertiary);
     color: var(--color-secondary);
 
 }
-.content h1{
-    text-align: center;   
+
+.content h1 {
+    text-align: center;
 }
-.content p{
-    font-size:x-large;
+
+.content p {
+    font-size: x-large;
     margin: 20px;
 }
+
 .mapBox {
     display: block;
     text-align: center;
@@ -54,61 +58,61 @@
 .mapBox iframe {
     display: block;
     margin: 0 auto;
-    width: 100%; 
-    max-width: 1140px; 
+    width: 100%;
+    max-width: 1140px;
     height: 600px;
     border: 0;
     border-radius: 25px;
 }
-.top{
+
+.top {
     align-items: center;
-    text-align: center; 
+    text-align: center;
     margin-top: 2rem;
 }
 
-.top img{
+.top img {
     margin-bottom: 20px;
     width: 200px;
     height: 200px;
 }
 
-
 @media screen and (min-width: 1025px) {
-   #maps{
-    display: none;
-   }
-}
-
-@media screen and (max-width: 1024px){
-    body{
-        background-image: none;
-    }
-
-    .container{
-        display: flex;
-        flex-direction: column;
-       
-    }
-
-    .content{
-        width: 100%;
-    }
-
-    #btn-loc{
+    #maps {
         display: none;
     }
 }
 
-@media screen and (max-width: 450px){
-    
-    .container{
+@media screen and (max-width: 1024px) {
+    body {
+        background-image: none;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    .content {
+        width: 100%;
+    }
+
+    #btn-loc {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 450px) {
+
+    .container {
         display: flex;
         flex-direction: column;
         justify-content: center;
         width: 200px;
     }
-    
-    .content{
+
+    .content {
         font-size: medium;
     }
 }

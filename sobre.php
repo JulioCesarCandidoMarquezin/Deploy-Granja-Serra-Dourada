@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,24 +13,26 @@
     <meta property="og:title" content="Granja Serra Dourada">
     <meta property="og:description" content="Granja Serra Dourada, produtora de ovos de alta qualidade em Cacoal - RO.">
     <meta property="og:image" content="/assets/images/banner.webp">
-    <meta property="og:url" content="https://www.granjaserradourada.com.br">
+    <meta property="og:url" content="https://www.granjaserradourada.com.br/sobre">
     <meta name="twitter:card" content="summary_large_image">
 
-    <link rel="stylesheet" href="/css/about.css">
+    <link rel="stylesheet" href="/css/sobre.css">
     <link rel="shortcut icon" href="/assets/images/logo_rounded.png" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
     <title>Quem Somos</title>
 </head>
+
 <body>
-    <header id="header"></header>
+    <?php include './components/header.php'; ?>
 
     <main>
         <!-- Header -->
 
         </div>
         <!-- Seção de História -->
-        <div class="header">
+        <div class="presentation-header">
             <h1>Granja Serra Dourada</h1>
             <p>A nossa história de dedicação e compromisso com a qualidade</p>
         </div>
@@ -112,9 +115,11 @@
         </div>
     </main>
 
-    <footer id="footer"></footer>
-    
-    <script type="module" src="/js/main.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <?php include './components/footer.php'; ?>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>
