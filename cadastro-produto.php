@@ -28,13 +28,6 @@
     <?php include './components/header.php'; ?>
 
     <div class="container mt-5">
-        <?php if (isset($_SESSION['message'])): ?>
-            <div class="alert alert-info" role="alert">
-                <?php echo $_SESSION['message']; ?>
-            </div>
-            <?php unset($_SESSION['message']); ?>
-        <?php endif; ?>
-
         <form class="form" action="/classes/Servidor.php" method="POST" enctype="multipart/form-data">
             <div class="container mt-5">
                 <div class="row justify-content-center">
