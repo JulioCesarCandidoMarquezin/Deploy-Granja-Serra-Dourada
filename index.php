@@ -12,11 +12,11 @@
 
     <meta property="og:title" content="Granja Serra Dourada">
     <meta property="og:description" content="Granja Serra Dourada, produtora de ovos de alta qualidade em Cacoal - RO.">
-    <meta property="og:image" content="/assets/images/banner.webp">
+    <meta property="og:image" content="assets/images/banner.webp">
     <meta property="og:url" content="https://www.granjaserradourada.com.br">
     <meta name="twitter:card" content="summary_large_image">
 
-    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="shortcut icon" href="/assets/images/logo_rounded.png" type="image/x-icon">
@@ -25,10 +25,10 @@
 </head>
 
 <body>
-    <?php include './components/header.php'; ?>
+    <?php include 'components/header.php'; ?>
 
     <main class="main-content">
-        <img id="banner" src="/assets/images/banner.webp" alt="Banner" loading="lazy">
+        <img id="banner" src="assets/images/banner.webp" alt="Banner" loading="lazy">
 
         <section class="highlight-cards-section">
             <h2 class="highlight-cards-title">Destaques</h2>
@@ -63,13 +63,13 @@
                         <a href="#" class="highlight-button">Conheça nossos ovos</a>
                     </div>
                     <div class="highlight-image">
-                        <img src="/assets/images/ovos.jpeg" alt="Ovos Caipiras" loading="lazy">
+                        <img src="assets/images/ovos.jpeg" alt="Ovos Caipiras" loading="lazy">
                     </div>
                 </section>
 
                 <section class="highlight">
                     <div class="highlight-image">
-                        <img src="/assets/images/ovos.jpeg" alt="Ovos Caipiras" loading="lazy">
+                        <img src="assets/images/ovos.jpeg" alt="Ovos Caipiras" loading="lazy">
                     </div>
                     <div class="highlight-text">
                         <h2>Ovos Caipiras</h2>
@@ -87,13 +87,13 @@
                         <a href="#" class="highlight-button">Conheça nossos ovos</a>
                     </div>
                     <div class="highlight-image">
-                        <img src="/assets/images/ovos.jpeg" alt="Ovos Caipiras" loading="lazy">
+                        <img src="assets/images/ovos.jpeg" alt="Ovos Caipiras" loading="lazy">
                     </div>
                 </section>
 
                 <section class="highlight">
                     <div class="highlight-image">
-                        <img src="/assets/images/condicoes.webp" alt="Ovos Caipiras" loading="lazy">
+                        <img src="assets/images/condicoes.webp" alt="Ovos Caipiras" loading="lazy">
                     </div>
                     <div class="highlight-text">
                         <h2>Qualidade de criação</h2>
@@ -134,7 +134,7 @@
         </section>
     </main>
 
-    <?php include './components/footer.php'; ?>
+    <?php include 'components/footer.php'; ?>
 </body>
 
 </html>
