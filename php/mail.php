@@ -2,8 +2,8 @@
 $name = $_POST["nome"];
 $telefone = $_POST["telefone"];
 $email = $_POST["email"];
-$assunto = $_POST["assunto"];
-$mensagem = $_POST["mensagem"];
+$assunto = $_POST["assunto"] . " id: " . uniqid();
+$mensagem = $_POST["mensagem"] . "\n" . "\n Telefone da Lenda: " . $telefone;
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
