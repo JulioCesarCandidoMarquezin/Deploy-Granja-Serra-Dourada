@@ -34,7 +34,7 @@
     margin: 20px;
 }
 
-.botao button{
+.botao button, .botao a{
     transition: transform 0.3s;
     border-color: var(--color-tertiary);
     color: var(--color-primary);
@@ -43,7 +43,7 @@
     margin: 20px ;
 }
 
-.botao button:hover{
+.botao button:hover, .botao a:hover{
     transform: translateY(-5px);
     background-color: var(--color-primary);
     border-color: var(--color-tertiary);
