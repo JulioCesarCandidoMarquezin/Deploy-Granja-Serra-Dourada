@@ -25,7 +25,7 @@
 </head>
 
 <body>
-    <?php include './components/header.php'; ?>
+    <?php include 'components/cabecalho.php'; ?>
 
     <div class="container mt-5">
         <form class="form" action="/classes/Servidor.php" method="POST" enctype="multipart/form-data">

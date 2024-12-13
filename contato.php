@@ -26,19 +26,11 @@
 </head>
 
 <body>
-  <?php include 'components/header.php'; ?>
+  <?php include 'components/cabecalho.php'; ?>
 
   <main>
-  <div class="presentation-header" style="background-image: url('assets/images/historia1.jpeg');">
-            <h1>Granja Serra Dourada</h1>
-            <p>A nossa história de dedicação e compromisso com a qualidade</p>
-        </div>
-    <div class="top">
-      <div class="top_text">
-        <h1>Fale conosco</h1>
-      </div>
+    <?php include 'components/apresentacao.php'; ?>
 
-    </div>
     <div class="container" id="blocks">
 
       <div class="content" id="email-box" style="display: none;">
@@ -128,7 +120,7 @@
     </div>
   </main>
 
-  <?php include 'components/footer.php'; ?>
+  <?php include 'components/rodape.php'; ?>
 
   <script src="js/contact.js"></script>
 </body>

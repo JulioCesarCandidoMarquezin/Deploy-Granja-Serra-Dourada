@@ -1,26 +1,5 @@
 @import url('base.css');
 
-.presentation-header {
-    
-    
-    color: white;
-    text-align: center;
-    padding: 6rem 2rem;
-    box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.5);
-}
-.presentation-header h1 {
-    font-size: 3rem;
-    font-weight: bold;
-}
-.presentation-header p {
-    font-size: 1.2rem;
-}
-
-.main-content {
-    display: flex;
-    flex-direction: column;
-}
-
 /* Banner */
 #banner {
     width: 100%;

@@ -25,14 +25,10 @@
 </head>
 
 <body>
-  <?php include 'components/header.php'; ?>
+  <?php include 'components/cabecalho.php'; ?>
 
   <main>
-    <!-- Cabeçalho do produto -->
-    <div class="history-header" style="background-image: url('assets/images/historia1.jpeg');">
-      <h1>Granja Serra Dourada</h1>
-      <p>Conheça Nossos Produtos!</p>
-    </div>
+    <?php include 'components/apresentacao.php'; ?>
 
     <!-- Início dos produtos -->
     <div class="history-section">
@@ -77,7 +73,7 @@
 
   </main>
 
-  <?php include 'components/footer.php'; ?>
+  <?php include 'components/rodape.php'; ?>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
