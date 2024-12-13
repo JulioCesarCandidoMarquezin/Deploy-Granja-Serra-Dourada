@@ -1,4 +1,5 @@
 <?php
+
 final class Database
 {
     private static string $driver = "mysql"; 
@@ -9,43 +10,65 @@ final class Database
     private static string $password = "root"; 
     private static string $charset = "utf8mb4"; 
     private static ?PDO $pdo = null;
-    private static string $error;
 
-    public static function connect()
+    public static function connect(): ?PDO
     {
-        if (self::$pdo === null) {
-            if (self::$driver === "mysql") {
-                $dsn = "mysql:host=" . self::$host . "; port=" . self::$port . ";dbname=" . self::$dbname . ";charset=" . self::$charset;
-            } elseif (self::$driver === "pgsql") {
-                $dsn = "pgsql:host=" . self::$host . "; port=" . self::$port . ";dbname=" . self::$dbname;
-            } else {
-                throw new Exception("Driver de banco de banco e dados não suportado" . self::$driver);
-            }
-
-            $options = [
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
-                PDO::ATTR_PERSISTENT => false, 
-                PDO::ATTR_EMULATE_PREPARES => false,
-            ];
-
-            try {
-                self::$pdo = new PDO($dsn, self::$username, self::$password, $options);
-            } catch (PDOException $e) {
-                self::$error = $e->getMessage();
-                echo "Erro de conexão" . self::$error;
-            }
-        }
-
-        return self::$pdo;
+        return self::$pdo ?? self::initializeConnection();
     }
 
-    public static function prepare($sql)
+    private static function initializeConnection(): PDO
+    {
+        $dsn = self::getDsn();
+        $options = [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
+            PDO::ATTR_PERSISTENT => false, 
+            PDO::ATTR_EMULATE_PREPARES => false,
+        ];
+
+        try {
+            self::$pdo = new PDO($dsn, self::$username, self::$password, $options);
+            return self::$pdo;
+        } catch (PDOException $e) {
+            throw new Exception("Connection error: " . $e->getMessage());
+        }
+    }
+
+    private static function getDsn(): string
+    {
+        return match (self::$driver) {
+            "mysql" => "mysql:host=" . self::$host . ";port=" . self::$port . ";dbname=" . self::$dbname . ";charset=" . self::$charset,
+            "pgsql" => "pgsql:host=" . self::$host . ";port=" . self::$port . ";dbname=" . self::$dbname,
+            default => throw new Exception("Unsupported database driver: " . self::$driver),
+        };
+    }
+
+    public static function prepare(string $sql): ?PDOStatement
     {
         $pdo = self::connect();
-        if ($pdo) {
-            return $pdo->prepare($sql);
+        return $pdo ? $pdo->prepare($sql) : null;
+    }
+
+     public static function execute(string $sql, array $params = []): bool
+    {
+        $stmt = self::prepare($sql);
+        if ($stmt) {
+            return $stmt->execute($params);
         }
         return false;
+    }
+
+    public static function executeQuery(string $sql, array $params = []): array
+    {
+        $stmt = self::prepare($sql);
+
+        if ($stmt) {
+            $stmt->execute($params);
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            return $result;
+        }
+
+        return [];
     }
 }

@@ -6,42 +6,42 @@ require_once 'Nivel.enum.php';
 class Usuario extends CRUD
 {
     protected static string $table = "Usuario";
-    protected static array $columns = [
-        'nome' => 'VARCHAR(50)',
-        'email' => 'VARCHAR(255)',
-        'nivel' => 'ENUM("administrador", "gerente", "funcionario")',
-        'senha' => 'VARCHAR(255)'
-    ];
-
     private ?int $id = null;
     private string $nome;
     private string $email;
     private Nivel $nivel;
     private string $senha;
 
-    public function create(): void
+    public function create(): bool
     {
-        if (empty($this->nome) || empty($this->email) || empty($this->senha) || !isset($this->nivel)) {
-            throw new InvalidArgumentException("All fields must be set before creating a user.");
-        }
+        $sql = "INSERT INTO " . static::$table . " (nome, email, nivel, senha) VALUES (?, ?, ?, ?)";
+        $params = [
+            $this->nome,
+            $this->email,
+            $this->nivel->value,
+            password_hash($this->senha, PASSWORD_BCRYPT)
+        ];
 
-        $fields = ['nome', 'email', 'nivel', 'senha'];
-        $values = [$this->nome, $this->email, $this->nivel->value, password_hash($this->senha, PASSWORD_BCRYPT)];
-        $params = $values;
-
-        $fieldsList = implode(", ", $fields);
-        $valuesList = implode(", ", array_fill(0, count($values), "?"));
-
-        $sql = "INSERT INTO " . static::$table . " ($fieldsList) VALUES ($valuesList)";
-        self::execute($sql, $params);
+        return Database::execute($sql, $params);
     }
 
-    public static function emailExists(string $email): bool
+    public static function getByEmail(string $email): array
     {
-        $sql = "SELECT COUNT(*) FROM " . static::$table . " WHERE email = ?";
-        $stmt = Database::prepare($sql);
-        $stmt->execute([$email]);
-        return $stmt->fetchColumn() > 0;
+        return self::getBy('email', $email);
+    }
+
+    public function update(): bool
+    {
+        $sql = "UPDATE " . static::$table . " SET nome = ?, email = ?, nivel = ?, senha = ? WHERE id = ?";
+        $params = [
+            $this->nome,
+            $this->email,
+            $this->nivel->value,
+            password_hash($this->senha, PASSWORD_BCRYPT),
+            $this->id
+        ];
+
+        return Database::execute($sql, $params);
     }
 
     public function getNivel(): Nivel
@@ -75,10 +75,7 @@ class Usuario extends CRUD
     }
 
     public function setNome(string $nome): self
-    {
-        if (empty($nome)) {
-            throw new InvalidArgumentException("Name cannot be empty.");
-        }
+    {    
         $this->nome = $nome;
         return $this;
     }
@@ -104,7 +101,7 @@ class Usuario extends CRUD
         if (strlen($senha) < 6) {
             throw new InvalidArgumentException("Password must be at least 6 characters long.");
         }
-        $this->senha = $senha;
+        $this->senha = password_hash($senha, PASSWORD_BCRYPT);
         return $this;
     }
 }

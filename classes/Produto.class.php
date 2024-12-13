@@ -5,32 +5,34 @@ require_once 'CRUD.class.php';
 class Produto extends CRUD
 {
     protected static string $table = "Produto";
-    protected static array $columns = [
-        'nome' => 'VARCHAR(50)',
-        'descricao' => 'TEXT',
-        'imagem' => 'VARCHAR(255)',
-    ];
-
     private int $id;
     private string $nome;
     private string $descricao;
     private string $imagem;
 
-    public function create(): void
+    public function create(): bool
     {
-        if (empty($this->nome) || empty($this->descricao) || empty($this->imagem)) {
-            throw new InvalidArgumentException("All fields must be set before creating a product.");
-        }
+        $sql = "INSERT INTO " . static::$table . " (nome, descricao, imagem) VALUES (?, ?, ?)";
+        $params = [
+            $this->nome,
+            $this->descricao,
+            $this->imagem
+        ];
 
-        $fields = ['nome', 'descricao', 'imagem'];
-        $values = [$this->nome, $this->descricao, $this->imagem];
-        $params = $values;
+        return Database::execute($sql, $params);
+    }
 
-        $fieldsList = implode(", ", $fields);
-        $valuesList = implode(", ", array_fill(0, count($values), "?"));
+    public function update(): bool
+    {
+        $sql = "UPDATE " . static::$table . " SET nome = ?, descricao = ?, imagem = ? WHERE id = ?";
+        $params = [
+            $this->nome,
+            $this->descricao,
+            $this->imagem,
+            $this->id
+        ];
 
-        $sql = "INSERT INTO " . static::$table . " ($fieldsList) VALUES ($valuesList)";
-        self::execute($sql, $params);
+        return Database::execute($sql, $params);
     }
 
     public function getId(): int
@@ -54,9 +56,6 @@ class Produto extends CRUD
 
     public function setNome(string $nome): self
     {
-        if (empty($nome)) {
-            throw new InvalidArgumentException("Name cannot be empty.");
-        }
         $this->nome = $nome;
         return $this;
     }
@@ -68,9 +67,6 @@ class Produto extends CRUD
 
     public function setDescricao(string $descricao): self
     {
-        if (empty($descricao)) {
-            throw new InvalidArgumentException("Description cannot be empty.");
-        }
         $this->descricao = $descricao;
         return $this;
     }
@@ -82,9 +78,6 @@ class Produto extends CRUD
 
     public function setImagem(string $imagem): self
     {
-        if (empty($imagem)) {
-            throw new InvalidArgumentException("Image path cannot be empty.");
-        }
         $this->imagem = $imagem;
         return $this;
     }
