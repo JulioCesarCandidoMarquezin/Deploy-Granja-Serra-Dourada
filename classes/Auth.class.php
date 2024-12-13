@@ -15,7 +15,7 @@ class Auth
         $userData = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($userData && password_verify($senha, $userData['senha'])) {
-            self::startSession($userData);
+            self::setUserCookies($userData);
             return true;
         }
 
@@ -37,9 +37,11 @@ class Auth
 
     public static function logout(): void
     {
-        session_start();
-        session_unset();
-        session_destroy();
+        setcookie("user_id", "", time() - 3600, "/", true, true);
+        setcookie("user_name", "", time() - 3600, "/", true, true);
+        setcookie("user_level", "", time() - 3600, "/", true, true);
+        header('Location: /index.php');
+        exit();
     }
 
     public static function checkLogin(): void
@@ -52,16 +54,14 @@ class Auth
 
     public static function usuarioAtual(): ?Usuario
     {
-        session_start();
-
-        if (!isset($_SESSION['user_id'])) {
+        if (!isset($_COOKIE['user_id'])) {
             return null;
         }
 
         return (new Usuario())
-            ->setId($_SESSION['user_id'])
-            ->setNome($_SESSION['user_name'])
-            ->setNivel(Nivel::from($_SESSION['user_level']));
+            ->setId((int)$_COOKIE['user_id'])
+            ->setNome($_COOKIE['user_name'])
+            ->setNivel(Nivel::from($_COOKIE['user_level']));
     }
 
     public static function temPermissao(Permissao $permissao): bool
@@ -80,12 +80,12 @@ class Auth
         return self::usuarioAtual() !== null;
     }
 
-    private static function startSession(array $userData): void
+    private static function setUserCookies(array $userData): void
     {
-        session_start();
-        $_SESSION['user_id'] = $userData['id'];
-        $_SESSION['user_name'] = $userData['nome'];
-        $_SESSION['user_level'] = $userData['nivel'];
+        setcookie("user_id", $userData['id'], time() + 3600, "/", "", true, true);
+        setcookie("user_name", $userData['nome'], time() + 3600, "/", "", true, true);
+        setcookie("user_level", $userData['nivel'], time() + 3600, "/", "", true, true);
         header('Location: /index.php');
+        exit();
     }
 }

@@ -4,24 +4,22 @@ require_once 'Auth.class.php';
 require_once 'Produto.class.php';
 require_once 'Mensagem.enum.php';
 
-session_start();
-
 function handleLogin() {
     if (isset($_POST['email'], $_POST['senha'])) {
         $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
         $senha = $_POST['senha'];
 
         if (Auth::login($email, $senha)) {
-            $_SESSION['message'] = Mensagem::LOGIN_SUCCESS;
+            setcookie("message", Mensagem::LOGIN_SUCCESS->value, time() + 3600, "/", true, true);
             header('Location: /index.php'); 
             exit();
         } else {
-            $_SESSION['message'] = Mensagem::LOGIN_FAILURE;
+            setcookie("message", Mensagem::LOGIN_FAILURE->value, time() + 3600, "/", true, true);
             header('Location: /login.php'); 
             exit();
         }
     } else {
-        $_SESSION['message'] = Mensagem::LOGIN_MISSING;
+        setcookie("message", Mensagem::LOGIN_MISSING->value, time() + 3600, "/", true, true);
     }
 }
 
@@ -34,20 +32,20 @@ function handleRegister() {
 
         try {
             Auth::register($nome, $email, $senha, $nivel);
-            $_SESSION['message'] = Mensagem::REGISTER_SUCCESS;
+            setcookie("message", Mensagem::REGISTER_SUCCESS->value, time() + 3600, "/", true, true);
             header('Location: /cadastro.php'); 
             exit();
         } catch (Exception $e) {
-            $_SESSION['message'] = Mensagem::REGISTER_FAILURE;
+            setcookie("message", Mensagem::REGISTER_FAILURE->value, time() + 3600, "/", true, true);
         }
     } else {
-        $_SESSION['message'] = Mensagem::REGISTER_MISSING;
+        setcookie("message", Mensagem::REGISTER_MISSING->value, time() + 3600, "/", true, true);
     }
 }
 
 function handleLogout() {
     Auth::logout();
-    $_SESSION['message'] = Mensagem::LOGOUT_SUCCESS;
+    setcookie("message", Mensagem::LOGOUT_SUCCESS->value, time() + 3600, "/", true, true);
     header('Location: /index.php');
     exit();
 }
@@ -67,12 +65,12 @@ function handleCadastroProduto() {
         $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
 
         if (!in_array($imagem['type'], $allowedTypes)) {
-            $_SESSION['message'] = Mensagem::IMAGE_FORMAT_ERROR;
+            setcookie("message", Mensagem::IMAGE_FORMAT_ERROR->value, time() + 3600, "/", true, true);
             return;
         }
 
         if ($imagem['error'] !== UPLOAD_ERR_OK) {
-            $_SESSION['message'] = Mensagem::IMAGE_UPLOAD_ERROR . $imagem['error'];
+            setcookie("message", Mensagem::IMAGE_UPLOAD_ERROR . $imagem['error'], time() + 3600, "/", true, true);
             return;
         }
 
@@ -81,9 +79,9 @@ function handleCadastroProduto() {
         $uploadPath = $uploadDir . $fileName;
 
         if (!move_uploaded_file($imagem['tmp_name'], $uploadPath)) {
-            $_SESSION['message'] = Mensagem::UPLOAD_ERROR;
+            setcookie("message", Mensagem::UPLOAD_ERROR->value, time() + 3600, "/", true, true);
             return;
- }
+        }
 
         try {
             $produto = new Produto();
@@ -94,14 +92,14 @@ function handleCadastroProduto() {
 
             $produto->create();
 
-            $_SESSION['message'] = Mensagem::PRODUCT_REGISTER_SUCCESS;
+            setcookie("message", Mensagem::PRODUCT_REGISTER_SUCCESS->value, time() + 3600, "/", true, true);
             header('Location: /cadastro-produto.php');
             exit();
         } catch (Exception $e) {
-            $_SESSION['message'] = Mensagem::PRODUCT_REGISTER_FAILURE . $e->getMessage();
+            setcookie("message", Mensagem::PRODUCT_REGISTER_FAILURE . $e->getMessage(), time() + 3600, "/", true, true);
         }
     } else {
-        $_SESSION['message'] = "Por favor, preencha todos os campos do formulário.";
+        setcookie("message", "Por favor, preencha todos os campos do formulário.", time() + 3600, "/", true, true);
     }
 }
 
@@ -126,8 +124,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             break;
 
         default:
-            $_SESSION['message'] = Mensagem::ACTION_UNRECOGNIZED;
+            setcookie("message", Mensagem::ACTION_UNRECOGNIZED->value, time() + 3600, "/", true, true);
     }
 } else {
-    $_SESSION['message'] = Mensagem::REQUEST_METHOD_NOT_ALLOWED;
+    setcookie("message", Mensagem::REQUEST_METHOD_NOT_ALLOWED->value, time() + 3600, "/", true, true);
 }
