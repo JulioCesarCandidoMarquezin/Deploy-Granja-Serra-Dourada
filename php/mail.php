@@ -1,23 +1,44 @@
 <?php
+$name = $_POST["nome"];
+$telefone = $_POST["telefone"];
+$email = $_POST["email"];
+$assunto = $_POST["assunto"] . " id: " . uniqid();
+$mensagem = $_POST["mensagem"] . "\n" . "\n Telefone da Lenda: " . $telefone;
 
-$name = $_POST["nome"];         
-$email = $_POST["email"];       
-$telefone = $_POST["telefone"]; 
-$assunto = $_POST["assunto"];   
-$mensagem = $_POST["mensagem"] . "<br> Nome da lenda: {$name}" . "<br> Telefone do indivíduo: {$telefone}";
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
-$to = $email;  
-$subject = $assunto;  
-$message = $mensagem;  
 
-$headers = "MIME-Version: 1.0" . "\r\n";
-$headers .= "Content-Type: text/html; charset=UTF-8" . "\r\n";  
-$headers .= "From: pamonhasan@gmail.com" . "\r\n";  
-$headers .= "Reply-To: pamonhasan@gmail.com " . "\r\n";  
+require '../vendor/autoload.php';
 
-if(mail($to, $subject, $message, $headers)) {
-    echo "E-mail enviado com sucesso para {$email}!";
-} else {
-    echo "Falha ao enviar e-mail.";
+
+$mail = new PHPMailer(true);
+
+try {
+    //Server settings
+    $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      
+    $mail->isSMTP();                                            
+    $mail->Host       = 'smtp.gmail.com';                     
+    $mail->SMTPAuth   = true;                                  
+    $mail->Username   = 'sendadordeemail@gmail.com';                     
+    $mail->Password   = 'pdjr mukm ruwx rczo';                               
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;            
+    $mail->Port       = 587;                                    
+
+    //Recipients
+    $mail->setFrom($email, $name);
+    $mail->addAddress('damarislopeslima63@gmail.com', 'Mulher');     
+    $mail->addReplyTo($email, $name);
+
+    //Content
+    $mail->Subject = $assunto;
+    $mail->Body    = $mensagem;
+
+
+    $mail->send();
+    echo 'Message has been sent';
+    header("Location: ../contato.php");
+} catch (Exception $e) {
+    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }
-
