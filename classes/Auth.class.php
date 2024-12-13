@@ -4,18 +4,16 @@ require_once 'Database.class.php';
 require_once 'Usuario.class.php';
 require_once 'Nivel.enum.php';
 require_once 'Permissao.enum.php';
+require_once 'Mensagem.enum.php';
 
 class Auth
 {
     public static function login(string $email, string $senha): bool
     {
-        $sql = "SELECT * FROM Usuario WHERE email = ?";
-        $stmt = Database::prepare($sql);
-        $stmt->execute([$email]);
-        $userData = $stmt->fetch(PDO::FETCH_ASSOC);
+        $user = Usuario::getByEmail($email)[0];
 
-        if ($userData && password_verify($senha, $userData['senha'])) {
-            self::setUserCookies($userData);
+        if ($user && password_verify($senha, $user['senha'])) {
+            self::setUserCookies($user);
             return true;
         }
 
@@ -24,22 +22,33 @@ class Auth
 
     public static function register(string $nome, string $email, string $senha, Nivel $nivel): bool
     {
-        if (Usuario::emailExists($email)) {
+        if (Usuario::getByEmail($email)) {
             throw new Exception("Email já está em uso.");
         }
 
-        $hashedPassword = password_hash($senha, PASSWORD_BCRYPT);
-        $sql = "INSERT INTO Usuario (nome, email, senha, nivel) VALUES (?, ?, ?, ?)";
-        $cadastrado = Usuario::execute($sql, [$nome, $email, $hashedPassword, $nivel->value]);
-
+        $cadastrado = (new Usuario())
+            ->setNome($nome)
+            ->setEmail($email)
+            ->setSenha($senha)
+            ->setNivel($nivel)
+            ->create();
+        
         return $cadastrado; 
     }
 
     public static function logout(): void
     {
-        setcookie("user_id", "", time() - 3600, "/", true, true);
-        setcookie("user_name", "", time() - 3600, "/", true, true);
-        setcookie("user_level", "", time() - 3600, "/", true, true);
+        setcookie("usuario_id", "", time() - 3600, "/", "", true, true);
+        setcookie("usuario_nome", "", time() - 3600, "/", "", true, true);
+        setcookie("usuario_nivel", "", time() - 3600, "/", "", true, true);
+
+        if (session_status() === PHP_SESSION_ACTIVE) {
+            session_unset(); 
+            session_destroy(); 
+        }
+
+        setMensagem(Mensagem::LOGOUT_SUCCESS->value);
+
         header('Location: /index.php');
         exit();
     }
@@ -54,14 +63,14 @@ class Auth
 
     public static function usuarioAtual(): ?Usuario
     {
-        if (!isset($_COOKIE['user_id'])) {
+        if (!isset($_COOKIE['usuario_id'])) {
             return null;
         }
 
         return (new Usuario())
-            ->setId((int)$_COOKIE['user_id'])
-            ->setNome($_COOKIE['user_name'])
-            ->setNivel(Nivel::from($_COOKIE['user_level']));
+            ->setId((int)$_COOKIE['usuario_id'])
+            ->setNome($_COOKIE['usuario_nome'])
+            ->setNivel(Nivel::from($_COOKIE['usuario_nivel']));
     }
 
     public static function temPermissao(Permissao $permissao): bool
@@ -80,11 +89,11 @@ class Auth
         return self::usuarioAtual() !== null;
     }
 
-    private static function setUserCookies(array $userData): void
+    private static function setUserCookies(array $user): void
     {
-        setcookie("user_id", $userData['id'], time() + 3600, "/", "", true, true);
-        setcookie("user_name", $userData['nome'], time() + 3600, "/", "", true, true);
-        setcookie("user_level", $userData['nivel'], time() + 3600, "/", "", true, true);
+        setcookie("usuario_id", $user['id'], time() + 3600, "/", "", true, true);
+        setcookie("usuario_nome", $user['nome'], time() + 3600, "/", "", true, true);
+        setcookie("usuario_nivel", $user['nivel'], time() + 3600, "/", "", true, true);
         header('Location: /index.php');
         exit();
     }

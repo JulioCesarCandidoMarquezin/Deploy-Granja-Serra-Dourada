@@ -4,108 +4,102 @@ require_once 'Auth.class.php';
 require_once 'Produto.class.php';
 require_once 'Mensagem.enum.php';
 
+function setMensagem(string $message) {
+    setcookie("message", $message, time() + 3600, "/", true, true);
+}
+
 function handleLogin() {
-    if (isset($_POST['email'], $_POST['senha'])) {
+    if (!empty($_POST['email']) && !empty($_POST['senha'])) {
         $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
         $senha = $_POST['senha'];
 
         if (Auth::login($email, $senha)) {
-            setcookie("message", Mensagem::LOGIN_SUCCESS->value, time() + 3600, "/", true, true);
-            header('Location: /index.php'); 
-            exit();
+            setMensagem(Mensagem::LOGIN_SUCCESS->value);
+            header('Location: /index.php');
         } else {
-            setcookie("message", Mensagem::LOGIN_FAILURE->value, time() + 3600, "/", true, true);
-            header('Location: /login.php'); 
-            exit();
+            setMensagem(Mensagem::LOGIN_FAILURE->value);
+            header('Location: /login.php');
         }
     } else {
-        setcookie("message", Mensagem::LOGIN_MISSING->value, time() + 3600, "/", true, true);
+        setMensagem(Mensagem::LOGIN_MISSING->value);
     }
+    exit();
 }
 
 function handleRegister() {
-    if (isset($_POST['nome'], $_POST['email'], $_POST['senha'], $_POST['nivel'])) {
-        $nome = filter_var($_POST['nome'], FILTER_SANITIZE_STRING);
+    if (!empty($_POST['nome']) && !empty($_POST['email']) && !empty($_POST['senha']) && !empty($_POST['nivel'])) {
+        $nome = htmlspecialchars(trim($_POST['nome']));
         $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
         $senha = $_POST['senha'];
-        $nivel = Nivel::from($_POST['nivel']); 
+        $nivel = Nivel::from($_POST['nivel']);
 
-        try {
-            Auth::register($nome, $email, $senha, $nivel);
-            setcookie("message", Mensagem::REGISTER_SUCCESS->value, time() + 3600, "/", true, true);
-            header('Location: /cadastro.php'); 
-            exit();
-        } catch (Exception $e) {
-            setcookie("message", Mensagem::REGISTER_FAILURE->value, time() + 3600, "/", true, true);
-        }
+        Auth::register($nome, $email, $senha, $nivel);
+        setMensagem(Mensagem::REGISTER_SUCCESS->value);
+        header('Location: /cadastro.php');
     } else {
-        setcookie("message", Mensagem::REGISTER_MISSING->value, time() + 3600, "/", true, true);
+        setMensagem(Mensagem::REGISTER_MISSING->value);
     }
+    exit();
 }
 
 function handleLogout() {
     Auth::logout();
-    setcookie("message", Mensagem::LOGOUT_SUCCESS->value, time() + 3600, "/", true, true);
+    setMensagem(Mensagem::LOGOUT_SUCCESS->value);
     header('Location: /index.php');
     exit();
 }
 
 function handleCadastroProduto() {
-    if (isset($_POST['nome'], $_POST['descricao'], $_FILES['imagem'])) {
-        $nome = filter_var($_POST['nome'], FILTER_SANITIZE_STRING);
-        $descricao = filter_var($_POST['descricao'], FILTER_SANITIZE_STRING);
-        $imagem = $_FILES['imagem'];
-
-        $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/assets/images/produtos/';
-        if (!is_dir($uploadDir)) {
-            mkdir($uploadDir, 0777, true);
-        }
-
-        $uploadPath = $uploadDir . basename($imagem['name']);
-        $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
-
-        if (!in_array($imagem['type'], $allowedTypes)) {
-            setcookie("message", Mensagem::IMAGE_FORMAT_ERROR->value, time() + 3600, "/", true, true);
-            return;
-        }
-
-        if ($imagem['error'] !== UPLOAD_ERR_OK) {
-            setcookie("message", Mensagem::IMAGE_UPLOAD_ERROR . $imagem['error'], time() + 3600, "/", true, true);
-            return;
-        }
-
-        $fileName = basename($imagem['name']);
-        $fileName = preg_replace('/[^a-zA-Z0-9_\-\.]/', '', $fileName);
-        $uploadPath = $uploadDir . $fileName;
-
-        if (!move_uploaded_file($imagem['tmp_name'], $uploadPath)) {
-            setcookie("message", Mensagem::UPLOAD_ERROR->value, time() + 3600, "/", true, true);
-            return;
-        }
-
-        try {
-            $produto = new Produto();
-            $produto
-                ->setNome($nome)
-                ->setDescricao($descricao)
-                ->setImagem($uploadPath);
-
-            $produto->create();
-
-            setcookie("message", Mensagem::PRODUCT_REGISTER_SUCCESS->value, time() + 3600, "/", true, true);
-            header('Location: /cadastro-produto.php');
-            exit();
-        } catch (Exception $e) {
-            setcookie("message", Mensagem::PRODUCT_REGISTER_FAILURE . $e->getMessage(), time() + 3600, "/", true, true);
-        }
-    } else {
-        setcookie("message", "Por favor, preencha todos os campos do formulário.", time() + 3600, "/", true, true);
+    if (empty($_POST['nome']) || empty($_POST['descricao']) || empty($_FILES['imagem'])) {
+        setMensagem("Por favor, preencha todos os campos do formulário.");
+        saveFormData($_POST); 
+        header('Location: /cadastro-produto.php');
+        exit();
     }
+
+    $nome = htmlspecialchars(trim($_POST['nome']));
+    $descricao = htmlspecialchars(trim($_POST['descricao']));
+    $imagem = $_FILES['imagem'];
+
+    $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/assets/images/produtos/';
+    if (!is_dir($uploadDir)) {
+        mkdir($uploadDir, 0777, true);
+    }
+
+    $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+    if (!in_array($imagem['type'], $allowedTypes) || $imagem['error'] !== UPLOAD_ERR_OK) {
+        setMensagem(Mensagem::IMAGE_FORMAT_ERROR->value);
+        saveFormData($_POST);
+        header('Location: /cadastro-produto.php');
+        exit();
+    }
+
+    $fileName = preg_replace('/[^a-zA-Z0-9_\-\.]/', '', basename($imagem['name']));
+    $uploadPath = $uploadDir . $fileName;
+
+    if (!move_uploaded_file($imagem['tmp_name'], $uploadPath)) {
+        setMensagem(Mensagem::UPLOAD_ERROR->value);
+        saveFormData($_POST); 
+        header('Location: /cadastro-produto.php');
+        exit();
+    }
+
+    $produto = new Produto();
+    $produto->setNome($nome)->setDescricao($descricao)->setImagem($uploadPath);
+    $produto->create();
+
+    setMensagem(Mensagem::PRODUCT_REGISTER_SUCCESS->value);
+    header('Location: /cadastro-produto.php');
+    exit();
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
-    $action = $_POST['action'];
+function saveFormData(array $data) {
+    $_SESSION['form_data'] = $data; // Salva os dados do formulário na sessão
+}
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['action'])) {
+    $action = $_POST['action'];
+    
     switch ($action) {
         case 'login':
             handleLogin();
@@ -124,8 +118,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             break;
 
         default:
-            setcookie("message", Mensagem::ACTION_UNRECOGNIZED->value, time() + 3600, "/", true, true);
+            setMensagem(Mensagem::ACTION_UNRECOGNIZED->value);
     }
 } else {
-    setcookie("message", Mensagem::REQUEST_METHOD_NOT_ALLOWED->value, time() + 3600, "/", true, true);
+    setMensagem(Mensagem::REQUEST_METHOD_NOT_ALLOWED->value);
 }
