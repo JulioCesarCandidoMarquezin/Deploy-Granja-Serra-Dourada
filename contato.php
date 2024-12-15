@@ -87,7 +87,7 @@
           botão abaixo, preencha o formulário e nos mande um E-mail, reponderemos o mais rápido possível! 
       </p>
         <div class="botao" style="display: flex; justify-content: center;">
-          <button class="btn btn-lg" id="btn-talk">Falar Agora</button>
+          <button class="btn btn-lg" id="btn-talk">E-mail</button>
         </div>
       </div>
 
