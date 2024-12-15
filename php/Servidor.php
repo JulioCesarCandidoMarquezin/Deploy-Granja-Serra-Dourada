@@ -54,7 +54,6 @@ function handleCadastroProduto()
 {
     if (empty($_POST['nome']) || empty($_POST['descricao']) || empty($_FILES['imagem'])) {
         Session::setMensagem(Mensagem::PRODUCT_REGISTER_EMPTY_FIELDS, Tipo::WARNING);
-        saveFormData($_POST); 
         header('Location: /cadastro-produto.php');
         exit();
     }
@@ -71,7 +70,6 @@ function handleCadastroProduto()
     $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
     if (!in_array($imagem['type'], $allowedTypes) || $imagem['error'] !== UPLOAD_ERR_OK) {
         Session::setMensagem(Mensagem::IMAGE_FORMAT_ERROR, Tipo::ERROR);
-        saveFormData($_POST);
         header('Location: /cadastro-produto.php');
         exit();
     }
@@ -81,7 +79,6 @@ function handleCadastroProduto()
 
     if (!move_uploaded_file($imagem['tmp_name'], $uploadPath)) {
         Session::setMensagem(Mensagem::IMAGE_UPLOAD_ERROR, Tipo::ERROR);
-        saveFormData($_POST); 
         header('Location: /cadastro-produto.php');
         exit();
     }
