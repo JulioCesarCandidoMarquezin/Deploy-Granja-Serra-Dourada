@@ -82,10 +82,10 @@
 
       
       <div class="content">
-        <h1>Bate-Papo</h1>
-        <p> O bate-papo é a solução ideal para esclarecer dúvidas rápidas e resolver problemas simples de forma ágil e
-          eficiente. Nossos atendentes estão prontos para ajudar você em tempo real. Se você tiver uma pergunta rápida
-          ou precisar de assistência imediata, inicie uma conversa agora mesmo!</p>
+        <h1>E-mail</h1>
+        <p>Se tem alguma dúvida, precisa de assistência ou informações adicionais sobre nossos produtos, Clique no 
+          botão abaixo, preencha o formulário e nos mande um E-mail, reponderemos o mais rápido possível! 
+      </p>
         <div class="botao" style="display: flex; justify-content: center;">
           <button class="btn btn-lg" id="btn-talk">Falar Agora</button>
         </div>
@@ -95,8 +95,7 @@
         <h1>Telefone</h1>
         <p>Para um atendimento mais personalizado ou se você prefere falar diretamente com um de nossos consultores,
           ligue para nós. Estamos disponíveis para atender suas necessidades e oferecer a melhor solução. Entre em
-          contato: [número de telefone]. Nossa equipe está à disposição de [horário de atendimento] para garantir que
-          você receba todo o suporte necessário.</p>
+          contato: (69) 99982-2940. Nossa equipe está à disposição para garantir que você receba todo o suporte necessário.</p>
       </div>
 
     </div>
