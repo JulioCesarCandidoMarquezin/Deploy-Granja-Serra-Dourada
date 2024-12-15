@@ -1,3 +1,5 @@
+<?php include 'components/mensagem.php'; ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 

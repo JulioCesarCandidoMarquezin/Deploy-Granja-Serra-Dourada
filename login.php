@@ -1,10 +1,16 @@
 <?php 
 include_once "php/Auth.class.php";
+include_once "php/Session.class.php";
+include_once "php/Mensagem.enum.php";
 
 if (Auth::estaLogado()) {
+    Session::setMensagem(Mensagem::ALREADY_LOGGED_IN, Tipo::INFO);
     header("Location: /index.php");
+    exit();
 }
 ?>
+
+<?php include 'components/mensagem.php'; ?>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
