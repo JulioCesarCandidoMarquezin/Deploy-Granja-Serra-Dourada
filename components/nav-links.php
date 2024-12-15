@@ -9,23 +9,26 @@ include_once 'php/Permissao.enum.php';
 <li><a class="navigation-link" href="/contato.php">Contato</a></li>
 
 <?php
-
     if (Auth::temPermissao(Permissao::GERENCIAR_USUARIOS)) {
-        echo '<li><a class="navigation-link" href="cadastro.php">Cadastro de usuário</a></li>';
+        echo <<<HTML
+            <li><a class="navigation-link" href="cadastro.php">Cadastro de usuário</a></li>
+        HTML;
     }
     if (Auth::temPermissao(Permissao::GERENCIAR_PRODUTOS)) {
-        echo '<li><a class="navigation-link" href="cadastro-produto.php">Cadastro de produto</a></li>';
+        echo <<<HTML
+            <li><a class="navigation-link" href="cadastro-produto.php">Cadastro de produto</a></li>
+        HTML;
     }
     if (Auth::estaLogado()) {       
-        echo 
-        '<li>
-            <form action="/php/Servidor.php" method="POST" style="display:inline;">
-                <input type="hidden" name="action" value="logout">
-                <button type="submit" class="btn btn-link navigation-link" style="padding: 0; background: none; border: none; color: inherit; text-decoration: underline; cursor: pointer;">Sair</button>
-            </form>
-        </li>';
+        echo <<<HTML
+            <li>
+                <form action="/php/Servidor.php" method="POST" style="display:inline;">
+                    <input type="hidden" name="action" value="logout">
+                    <button type="submit" class="btn btn-link navigation-link" style="padding: 0; background: none; border: none; color: inherit; text-decoration: underline; cursor: pointer;">Sair</button>
+                </form>
+            </li>
+        HTML;
     } else {
         echo '<li><a class="navigation-link" href="/login.php">Login</a></li>';
     }
-
 ?>
