@@ -52,12 +52,7 @@ class Auth
         Session::setCookie("usuario_id", "");
         Session::setCookie("usuario_nome", "");
         Session::setCookie("usuario_nivel", "");
-
-        if (session_status() === PHP_SESSION_ACTIVE) {
-            session_unset(); 
-            session_destroy(); 
-        }
-
+        
         Session::setMensagem(Mensagem::LOGOUT_SUCCESS, Tipo::SUCCESS);
 
         header('Location: /index.php');

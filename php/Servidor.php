@@ -64,7 +64,7 @@ function handleLogout()
 {
     if (!Auth::estaLogado()) {
         header('Location: /index.php');
-        Session::setMensagem(Mensagem::ALREADY_LOGGED_OUT, Tipo::INFO);
+        Session::setMensagem(Mensagem::NOT_LOGGED_IN, Tipo::INFO);
         exit();
     }
 
