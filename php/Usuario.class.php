@@ -19,7 +19,7 @@ class Usuario extends CRUD
             $this->nome,
             $this->email,
             $this->nivel->value,
-            password_hash($this->senha, PASSWORD_BCRYPT)
+            $this->senha
         ];
 
         return Database::execute($sql, $params);
@@ -37,7 +37,7 @@ class Usuario extends CRUD
             $this->nome,
             $this->email,
             $this->nivel->value,
-            password_hash($this->senha, PASSWORD_BCRYPT),
+            $this->senha,
             $this->id
         ];
 
@@ -98,9 +98,6 @@ class Usuario extends CRUD
 
     public function setSenha(string $senha): self
     {
-        if (strlen($senha) < 6) {
-            throw new InvalidArgumentException("Password must be at least 6 characters long.");
-        }
         $this->senha = password_hash($senha, PASSWORD_BCRYPT);
         return $this;
     }
