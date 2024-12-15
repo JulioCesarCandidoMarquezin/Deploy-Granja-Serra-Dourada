@@ -36,11 +36,6 @@ html, body {
     font-family: 'Arial', sans-serif;
 }
 
-main {
-    width: 100%;
-    height: 100%;
-}
-
 .top_text::after {
     content: '';
     width: 100px;

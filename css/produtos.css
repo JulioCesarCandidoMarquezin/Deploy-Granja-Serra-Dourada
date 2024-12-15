@@ -1,10 +1,5 @@
 @import url('base.css');
 
-main {
-    width: auto;
-    height: auto;
-}
-
 /* Header estilizado */
 .history-header {
     background-image: url('/assets/images/logo.webp');
