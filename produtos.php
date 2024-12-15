@@ -7,13 +7,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="copyright" content="&copy;2024 Granja Serra Dourada">
-  <meta name="description" content="Granja Serra Dourada, Cacoal - RO.">
-  <meta name="keywords" content="rondonia, cacoal, granja, serra, dourada, home, ovo, ovos, natureggs, galinha">
+  <meta name="description" content="Granja Serra Dourada, produtora de ovos de alta qualidade em Cacoal - RO.">
+  <meta name="keywords" content="rondonia, cacoal, granja, serra, dourada, ovos, produtos, alta qualidade">
   <meta name="author" content="Granja Serra Dourada">
   <meta name="robots" content="index, follow">
 
-  <meta property="og:title" content="Granja Serra Dourada">
-  <meta property="og:description" content="Granja Serra Dourada, produtora de ovos de alta qualidade em Cacoal - RO.">
+  <meta property="og:title" content="Granja Serra Dourada - Produtos">
+  <meta property="og:description" content="Conheça os produtos de alta qualidade da Granja Serra Dourada, em Cacoal - RO.">
   <meta property="og:image" content="assets/images/banner.webp">
   <meta property="og:url" content="https://www.granjaserradourada.com.br/produtos.php">
   <meta name="twitter:card" content="summary_large_image">
@@ -32,47 +32,25 @@
   <main>
     <?php include 'components/apresentacao.php'; ?>
 
-    <!-- Início dos produtos -->
-    <div class="history-section">
-      <h2 class="section-title">Nossos Produtos</h2>
-    </div>
-    <!-- Primeira fileira de produtos (máximo 3)-->
-    <div class="flex-container">
-      <!-- Produto 1 -->
-      <div class="align-items-stretch">
-        <div class="" style="width: 18rem;">
-          <img src="assets/images/ovo-granja.webp" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Nome 1</h5>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat, dignissimos.
-            </p>
-          </div>
+    <section class="history-section">
+      <div class="container py-5">
+        <h2 class="section-title">Nossos Produtos</h2>
+        <div class="row g-4">
+          <?php
+            include_once 'php/Produto.class.php';
+            $produtos = Produto::all();
+
+            if (!empty($produtos) && is_array($produtos)) {
+              foreach ($produtos as $produto) {
+                include 'components/produto.php';
+              }
+            } else {
+              echo '<p class="text-center">Nenhum produto disponível no momento.</p>';
+            }
+          ?>
         </div>
       </div>
-
-      <!-- Produto 2 -->
-      <div class="align-items-stretch">
-        <div class="" style="width: 18rem;">
-          <img src="assets/images/ovo-granja.webp" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Nome 2</h5>
-            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, provident.
-          </div>
-        </div>
-      </div>
-
-      <!-- Produto 3 -->
-      <div class="align-items-stretch">
-        <div class="" style="width: 18rem;">
-          <img src="assets/images/ovo-granja.webp" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Nome 3</h5>
-            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus laboriosam.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
+    </section>
   </main>
 
   <?php include 'components/rodape.php'; ?>
