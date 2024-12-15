@@ -67,10 +67,6 @@ if (Auth::estaLogado()) {
                                 <button type="submit" class="btn btn-primary">Entrar</button>
                             </div>
                         </form>
-
-                        <div class="text-center mt-3">
-                            <small>Esqueceu sua senha? <a href="/esqueci-senha.php">Esqueci minha senha</a></small>
-                        </div>
                     </div>
                 </div>
             </div>
