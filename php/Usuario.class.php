@@ -25,9 +25,10 @@ class Usuario extends CRUD
         return Database::execute($sql, $params);
     }
 
-    public static function getByEmail(string $email): array
+    public static function getByEmail(string $email): ?array
     {
-        return self::getBy('email', $email);
+        $result = self::getBy('email', $email);
+        return $result ? $result[0] ?? null : null;
     }
 
     public function update(): bool
@@ -63,7 +64,7 @@ class Usuario extends CRUD
     public function setEmail(string $email): self
     {
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            throw new InvalidArgumentException("Invalid email format.");
+            return $this;
         }
         $this->email = $email;
         return $this;
