@@ -13,6 +13,7 @@ enum Mensagem: string
     case REGISTER_EMAIL_INVALID = "Email inválido. Por favor, forneça um email válido.";
     case REGISTER_EMAIL_ALREADY_EXISTS = "O email já está em uso.";
     case LOGOUT_SUCCESS = "Você saiu com sucesso!";
+    case ALREADY_LOGGED_OUT = "Você já foi deslogado.";
     case IMAGE_FORMAT_ERROR = "Formato de imagem inválido. Use JPEG, PNG ou GIF.";
     case IMAGE_UPLOAD_ERROR = "Erro no upload da imagem: ";
     case PRODUCT_REGISTER_SUCCESS = "Produto cadastrado com sucesso!";

@@ -5,45 +5,69 @@ require_once 'Produto.class.php';
 require_once 'Mensagem.enum.php';
 require_once 'Tipo.enum.php';
 
+function validateEmail($email) {
+    $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+    return filter_var($email, FILTER_VALIDATE_EMAIL);
+}
+
 function handleLogin() 
 {
-    if (!empty($_POST['email']) && !empty($_POST['senha'])) {
-        $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
-        $senha = $_POST['senha'];
-
-        Auth::login($email, $senha) 
-            ? header('Location: /index.php') 
-            : header('Location: /login.php');
-    } else {
-        Session::setMensagem(Mensagem::LOGIN_MISSING, Tipo::WARNING);
+    if (Auth::estaLogado()) {
+        header('Location: /index.php');
+        Session::setMensagem(Mensagem::ALREADY_LOGGED_IN, Tipo::INFO);
+        exit();
     }
+
+    if (empty($_POST['email']) || empty($_POST['senha'])) {
+        Session::setMensagem(Mensagem::LOGIN_MISSING, Tipo::WARNING);
+        header('Location: /login.php');
+        exit();
+    }
+
+    $email = $_POST['email'];
+    $senha = $_POST['senha'];
+
+    Auth::login($email, $senha) 
+        ? header('Location: /index.php') 
+        : header('Location: /login.php');
+    
     exit();
 }
 
 function handleRegister() 
 {
-    if (!empty($_POST['nome']) && !empty($_POST['email']) && !empty($_POST['senha']) && !empty($_POST['nivel'])) {
-        $nome = htmlspecialchars(trim($_POST['nome']));
-        $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
-        $email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
-        $senha = $_POST['senha'];
-        $nivel = Nivel::from($_POST['nivel']);
+    Auth::checkPermissao(Permissao::GERENCIAR_USUARIOS);
 
-        if (!$email) {
-            Session::setMensagem(Mensagem::REGISTER_EMAIL_INVALID, Tipo::WARNING);
-        } else {
-            Auth::register($nome, $email, $senha, $nivel);
-        }
-
-        header('Location: /cadastro.php');
-    } else {
+    if (empty($_POST['nome']) || empty($_POST['email']) || empty($_POST['senha']) || empty($_POST['nivel'])) {
         Session::setMensagem(Mensagem::REGISTER_MISSING, Tipo::WARNING);
+        header('Location: /cadastro.php');
+        exit();
     }
+
+    $nome = htmlspecialchars(trim($_POST['nome']));
+    $email = $_POST['email'];
+    $senha = $_POST['senha'];
+    $nivel = Nivel::from($_POST['nivel']);
+
+    if (!validateEmail($email)) {
+        Session::setMensagem(Mensagem::REGISTER_EMAIL_INVALID, Tipo::WARNING);
+        header('Location: /cadastro.php');
+        exit();
+    }
+
+    Auth::register($nome, $email, $senha, $nivel);
+    header('Location: /cadastro.php');
     exit();
 }
 
 function handleLogout() 
 {
+    if (!Auth::estaLogado()) {
+        header('Location: /index.php');
+        Session::setMensagem(Mensagem::ALREADY_LOGGED_OUT, Tipo::INFO);
+        exit();
+    }
+
     Auth::logout();
     Session::setMensagem(Mensagem::LOGOUT_SUCCESS, Tipo::SUCCESS);
     header('Location: /index.php');
@@ -52,6 +76,8 @@ function handleLogout()
 
 function handleCadastroProduto() 
 {
+    Auth::checkPermissao(Permissao::GERENCIAR_PRODUTOS);
+
     if (empty($_POST['nome']) || empty($_POST['descricao']) || empty($_FILES['imagem'])) {
         Session::setMensagem(Mensagem::PRODUCT_REGISTER_EMPTY_FIELDS, Tipo::WARNING);
         header('Location: /cadastro-produto.php');
@@ -87,39 +113,33 @@ function handleCadastroProduto()
     $produto->setNome($nome)->setDescricao($descricao)->setImagem($uploadPath);
     $cadastrado = $produto->create();
 
-    if ($cadastrado) {
-        Session::setMensagem(Mensagem::PRODUCT_REGISTER_SUCCESS, Tipo::SUCCESS);
-    } else {
-        Session::setMensagem(Mensagem::PRODUCT_REGISTER_FAILURE, Tipo::ERROR);
-    }
+    $message = $cadastrado ? Mensagem::PRODUCT_REGISTER_SUCCESS : Mensagem::PRODUCT_REGISTER_FAILURE;
+    $messageType = $cadastrado ? Tipo::SUCCESS : Tipo::ERROR;
 
+    Session::setMensagem($message, $messageType);
     header('Location: /cadastro-produto.php');
     exit();
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['action'])) 
-{
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['action'])) {
     $action = $_POST['action'];
     
     switch ($action) {
         case 'login':
             handleLogin();
             break;
-
         case 'cadastro':
             handleRegister();
             break;
-
         case 'logout':
             handleLogout();
             break;
-
         case 'cadastro-produto':
             handleCadastroProduto();
             break;
-
         default:
             Session::setMensagem(Mensagem::ACTION_UNRECOGNIZED, Tipo::WARNING);
+            break;
     }
 } else {
     Session::setMensagem(Mensagem::REQUEST_METHOD_NOT_ALLOWED, Tipo::WARNING);

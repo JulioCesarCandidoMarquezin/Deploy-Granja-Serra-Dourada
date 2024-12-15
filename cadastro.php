@@ -1,3 +1,9 @@
+<?php 
+include_once 'php/Auth.class.php';
+include_once 'php/Permissao.enum.php';
+Auth::checkPermissao(Permissao::GERENCIAR_USUARIOS);
+?>
+
 <?php include 'components/mensagem.php'; ?>
 
 <!DOCTYPE html>

@@ -91,4 +91,13 @@ class Auth
     {
         return self::usuario() !== null;
     }
+
+    public static function checkPermissao(Permissao $permissao): void
+    {
+        if (!Auth::estaLogado() || !Auth::temPermissao($permissao)) {
+            Session::setMensagem(Mensagem::PERMISSSION_DENIED, Tipo::WARNING);
+            header('Location: /index.php');
+            exit();
+        }
+    }
 }
