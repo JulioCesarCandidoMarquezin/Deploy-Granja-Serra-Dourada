@@ -15,7 +15,7 @@
   <meta property="og:title" content="Granja Serra Dourada">
   <meta property="og:description" content="Granja Serra Dourada, produtora de ovos de alta qualidade em Cacoal - RO.">
   <meta property="og:image" content="assets/images/banner.webp">
-  <meta property="og:url" content="https://www.granjaserradourada.com.br/produtos">
+  <meta property="og:url" content="https://www.granjaserradourada.com.br/produtos.php">
   <meta name="twitter:card" content="summary_large_image">
 
   <link rel="stylesheet" href="css/produtos.css">
