@@ -81,9 +81,9 @@
                                 <h5 class="text-center card-title fw-bold text-success">Energia Renovável</h5>
                                 <p class="card-text text-muted">Utilizamos energia solar para abastecer nossa granja, reduzindo a emissão de carbono.</p>
                             </div>
-                            <div class="card-footer bg-transparent text-center">
-                                <img src="assets/images/energia.webp" class="img-fluid rounded shadow-sm" alt="Energia Solar">
-                            </div>
+                            <p class="text-center card-text card-footer text-muted">
+                                Energia solar
+                            </p>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -92,9 +92,9 @@
                                 <h5 class="text-center card-title fw-bold text-success">Reaproveitamento</h5>
                                 <p class="card-text text-muted">Adotamos práticas de reutilização de água e compostagem de resíduos orgânicos.</p>
                             </div>
-                            <div class="card-footer bg-transparent text-center">
-                                <img src="assets/images/agua.webp" class="img-fluid rounded shadow-sm" alt="Reaproveitamento de Água">
-                            </div>
+                            <p class="text-center card-text card-footer text-muted">
+                                Reutilização e compostagem
+                            </p>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -103,9 +103,9 @@
                                 <h5 class="text-center card-title fw-bold text-success">Bem-estar Animal</h5>
                                 <p class="card-text text-muted">Garantimos um ambiente saudável e espaçoso para as aves.</p>
                             </div>
-                            <div class="card-footer bg-transparent text-center">
-                                <img src="assets/images/bem-estar.webp" class="img-fluid rounded shadow-sm" alt="Bem-estar Animal">
-                            </div>
+                            <p class="text-center card-text card-footer text-muted">
+                                Qualidade e cuidado
+                            </p>
                         </div>
                     </div>
                 </div>
