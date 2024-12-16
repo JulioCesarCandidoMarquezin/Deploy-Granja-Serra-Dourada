@@ -2,9 +2,9 @@
 include_once 'php/Auth.class.php';
 include_once 'php/Permissao.enum.php';
 Auth::checkPermissao(Permissao::GERENCIAR_PRODUTOS);
-?>
 
-<?php include 'components/mensagem.php'; ?>
+include 'components/mensagem.php';
+?>
 
 <!DOCTYPE html>
 <html lang="pt-br">

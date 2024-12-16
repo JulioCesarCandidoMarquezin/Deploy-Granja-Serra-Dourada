@@ -8,9 +8,9 @@ if (Auth::estaLogado()) {
     header("Location: /index.php");
     exit();
 }
-?>
 
-<?php include 'components/mensagem.php'; ?>
+include 'components/mensagem.php';
+?>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
