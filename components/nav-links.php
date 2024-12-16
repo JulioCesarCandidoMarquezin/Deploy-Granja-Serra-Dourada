@@ -7,6 +7,7 @@ include_once 'php/Permissao.enum.php';
 <li><a class="navigation-link" href="/sobre.php">Quem Somos</a></li>
 <li><a class="navigation-link" href="/produtos.php">Produtos</a></li>
 <li><a class="navigation-link" href="/contato.php">Contato</a></li>
+<li><a class="navigation-link" href="/sustentabilidade.php">Sustentabilidade</a></li>
 
 <?php
     if (Auth::temPermissao(Permissao::GERENCIAR_USUARIOS)) {
