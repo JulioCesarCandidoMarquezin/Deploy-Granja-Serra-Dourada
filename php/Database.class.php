@@ -3,7 +3,7 @@
 final class Database
 {
     private static string $driver = "mysql"; 
-    private static string $host = "mysql"; 
+    private static string $host = "localhost"; 
     private static string $dbname = "granja-serra-dourada"; 
     private static int $port = 3306; 
     private static string $username = "root"; 

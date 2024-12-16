@@ -1,44 +1,52 @@
 <?php
-$name = $_POST["nome"];
-$telefone = $_POST["telefone"];
-$email = $_POST["email"];
-$assunto = $_POST["assunto"] . " id: " . uniqid();
-$mensagem = $_POST["mensagem"] . "\n" . "\n Telefone da Lenda: " . $telefone;
-
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-
 require '../vendor/autoload.php';
 
+$smtp_user = getenv('SMTP_USER'); 
+$smtp_password = getenv('SMTP_PASSWORD');
+
+function sanitizeInput($input) {
+    return htmlspecialchars(trim($input), ENT_QUOTES, 'UTF-8');
+}
+
+$name = sanitizeInput($_POST["nome"] ?? '');
+$telefone = sanitizeInput($_POST["telefone"] ?? '');
+$email = filter_var($_POST["email"] ?? '', FILTER_VALIDATE_EMAIL);
+$assunto = sanitizeInput($_POST["assunto"] ?? '') . " id: " . uniqid();
+$mensagem = sanitizeInput($_POST["mensagem"] ?? '') . $telefone;
+
+if (empty($name) || empty($telefone) || !$email || empty($mensagem)) {
+    die("Preencha todos os campos corretamente.");
+}
 
 $mail = new PHPMailer(true);
 
 try {
-    //Server settings
-    $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      
-    $mail->isSMTP();                                            
-    $mail->Host       = 'smtp.gmail.com';                     
-    $mail->SMTPAuth   = true;                                  
-    $mail->Username   = 'sendadordeemail@gmail.com';                     
-    $mail->Password   = 'pdjr mukm ruwx rczo';                               
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;            
-    $mail->Port       = 587;                                    
+    $mail->SMTPDebug = SMTP::DEBUG_OFF;
+    $mail->isSMTP();
+    $mail->Host       = 'smtp.gmail.com';
+    $mail->SMTPAuth   = true;
+    $mail->Username   = $smtp_user;
+    $mail->Password   = $smtp_password;
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    $mail->Port       = 587;
 
-    //Recipients
-    $mail->setFrom($email, $name);
-    $mail->addAddress('damarislopeslima63@gmail.com', 'Mulher');     
+    $mail->setFrom($smtp_user, 'Granja Serra Dourada');
+    $mail->addAddress('granja-serra-dourada@gmail.com', 'Granja Serra Dourada');
     $mail->addReplyTo($email, $name);
 
-    //Content
     $mail->Subject = $assunto;
     $mail->Body    = $mensagem;
 
-
     $mail->send();
-    echo 'Message has been sent';
-    header("Location: ../contato.php");
+
+    header("Location: /contato.php");
+    exit;
 } catch (Exception $e) {
-    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    error_log("Erro ao enviar e-mail: {$mail->ErrorInfo}");
+    header("Location: /contato.php?status=error");
+    exit;
 }
