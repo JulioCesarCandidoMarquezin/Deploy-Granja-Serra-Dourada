@@ -29,7 +29,7 @@
 <body>
     <?php include 'components/cabecalho.php'; ?>
 
-    <main class="main-content">
+    <main>
         <?php include 'components/apresentacao.php'; ?>
 
         <section class="highlight-cards-section">

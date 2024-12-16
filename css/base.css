@@ -62,11 +62,6 @@ html, body {
     font-size: 1.2rem;
 }
 
-.main-content {
-    display: flex;
-    flex-direction: column;
-}
-
 #header {
     width: 100%;
     height: clamp(60px, 5vw + 10px, 70px);
