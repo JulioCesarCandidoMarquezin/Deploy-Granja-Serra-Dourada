@@ -22,8 +22,7 @@ body {
 .section-title {
     text-align: center;
     font-size: 2.5rem;
-    color: #333;
-    margin: 2.5rem 0;
+    color: var(--brown-dark);
     position: relative;
 }
 .section-title:after {
@@ -35,6 +34,7 @@ body {
     margin: 0.5rem auto;
     margin-bottom: 25px;
 }
+
 .history-section {
     padding: 3rem 0;
 }
