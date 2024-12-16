@@ -10,8 +10,8 @@ if ($mensagem && $tipo) {
 
     echo <<<HTML
         <div class="alert-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 1050; width: auto;">
-            <div class="alert alert-{$tipo} shadow-sm" role="alert" id="alert-message">
-                <span>{$mensagem}</span>
+            <div class="alert alert-$tipo shadow-sm" role="alert" id="alert-message">
+                <span>$mensagem</span>
             </div>
         </div>
 
