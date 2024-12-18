@@ -2,7 +2,7 @@
 
 final class Database
 {
-    private static string $driver = "pqsql"; 
+    private static string $driver = "pgsql"; 
     private static string $host = "dpg-cthckg9opnds73b27ic0-a"; 
     private static string $dbname = "granja_serra_dourada"; 
     private static int $port = 3306; 
