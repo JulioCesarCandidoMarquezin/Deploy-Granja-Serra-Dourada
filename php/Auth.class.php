@@ -14,15 +14,20 @@ class Auth
     {
         $user = Usuario::getByEmail($email);
 
-        if ($user && password_verify($senha, $user['senha'])) {
-            Session::setMensagem(Mensagem::LOGIN_SUCCESS, Tipo::SUCCESS);
-            Session::setUserCookies($user);
-
-            return true;
+        if ($user === null) {
+            Session::setMensagem(Mensagem::LOGIN_EMAIL_NOT_FOUND, Tipo::ERROR);
+            return false;
         }
 
-        Session::setMensagem(Mensagem::LOGIN_FAILURE, Tipo::ERROR);
-        return false;
+        if (!password_verify($senha, $user['senha'])) {
+            Session::setMensagem(Mensagem::LOGIN_FAILURE, Tipo::ERROR);
+            return false;
+        }
+
+        Session::setMensagem(Mensagem::LOGIN_SUCCESS, Tipo::SUCCESS);
+        Session::setUserCookies($user);
+
+        return true;
     }
 
     public static function register(string $nome, string $email, string $senha, Nivel $nivel): bool

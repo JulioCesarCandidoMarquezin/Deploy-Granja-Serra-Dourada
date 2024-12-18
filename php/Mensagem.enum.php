@@ -5,6 +5,7 @@ enum Mensagem: string
     case LOGIN_SUCCESS = "Login realizado com sucesso!";
     case LOGIN_FAILURE = "Credenciais inválidas!";
     case LOGIN_MISSING = "Por favor, forneça o e-mail e a senha.";
+    case LOGIN_EMAIL_NOT_FOUND = "Tem certeza de que o email está correto?";
     case NOT_LOGGED_IN = "Você não está logado.";
     case ALREADY_LOGGED_IN = "Você já está logado.";
     case REGISTER_SUCCESS = "Cadastro realizado com sucesso! Agora o usuário pode fazer login.";
