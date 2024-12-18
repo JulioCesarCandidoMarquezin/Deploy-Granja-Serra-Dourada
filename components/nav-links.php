@@ -22,14 +22,16 @@ include_once 'php/Permissao.enum.php';
     }
     if (Auth::estaLogado()) {       
         echo <<<HTML
-            <li class="navigation-link">
+            <li>
                 <form action="/php/Servidor.php" method="POST" style="display:inline;">
                     <input type="hidden" name="action" value="logout">
-                    <button type="submit" class="btn btn-link" style="padding: 0; background: none; border: none; color: inherit; cursor: pointer;">Sair</button>
+                    <button type="submit" class="btn btn-link navigation-link" style="padding: 0; background: none; border: none; color: inherit; cursor: pointer;">Sair</button>
                 </form>
             </li>
         HTML;
     } else {
-        echo '<li><a class="navigation-link" href="/login.php">Login</a></li>';
+        echo <<<HTML
+            <li><a class="navigation-link" href="/login.php">Login</a></li>
+        HTML;
     }
 ?>

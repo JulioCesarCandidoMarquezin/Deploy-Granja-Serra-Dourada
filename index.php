@@ -45,7 +45,7 @@
                     <p>{}</p>
                 </div>
                 <div class="highlight-card">
-                    <h3>Nutrição</h3>
+                    <h3>Sustentabilidade</h3>
                     <p>{}</p>
                 </div>
                 <div class="highlight-card">
@@ -59,8 +59,8 @@
             <div class="highlights-container">
                 <section class="highlight">
                     <div class="highlight-text">
-                        <h2>Ovos Caipiras</h2>
-                        <p>Nossos ovos caipiras são produzidos com o máximo de qualidade, garantindo frescor e um sabor
+                        <h2>Ovos in natura</h2>
+                        <p>Nossos Ovos in natura são produzidos com o máximo de qualidade, garantindo frescor e um sabor
                             autêntico.</p>
                         <a href="#" class="highlight-button">Conheça nossos ovos</a>
                     </div>

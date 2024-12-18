@@ -8,6 +8,7 @@
             <img id="menu-icon" src="assets/icons/menu-closed.png" alt="Abrir menu" loading="lazy">
         </button>
 
+        // Alterar para sumir saindo o mouse, banir o X
         <div id="menu-box" class="hidden" aria-hidden="true">
             <nav>
                 <ul id="navigation-links-mobile" class="navigation-links">
@@ -16,12 +17,6 @@
             </nav>
         </div>
     </div>
-
-    <nav>
-        <ul id="navigation-links-desktop" class="navigation-links">
-            <?php include 'nav-links.php'; ?>
-        </ul>
-    </nav>
 
     <script>
         function menu_toggle() {

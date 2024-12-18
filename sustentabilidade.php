@@ -48,6 +48,7 @@
                     <h2 class="fw-bold text-success">Práticas Sustentáveis</h2>
                     <ul class="list-unstyled">
                         <li class="mb-3">
+                            // Usa bosta também
                             <i class="bi bi-check-circle text-success me-2"></i>✓ Uso de energia solar para reduzir emissões de carbono.
                         </li>
                         <li class="mb-3">

@@ -1,7 +1,7 @@
 <?php 
 
 $nome = htmlspecialchars($produto['nome'], ENT_QUOTES);
-$imagem = htmlspecialchars($produto['imagem'], ENT_QUOTES);
+$imagem = "/assets/images/abo.jpeg";
 $descricao = htmlspecialchars($produto['descricao'], ENT_QUOTES);
 
 echo <<<HTML

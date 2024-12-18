@@ -25,7 +25,7 @@ if ($mensagem && $tipo) {
                 }
             }
 
-            setTimeout(closeAlert, 5000);
+            setTimeout(closeAlert, 3000);
 
             document.getElementById('alert-message').addEventListener('click', closeAlert);
 
